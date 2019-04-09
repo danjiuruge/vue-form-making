@@ -1,4 +1,5 @@
 function findRemoteFunc (list, funcList, tokenFuncList, blankList) {
+  console.log(list)
   for (let i = 0; i < list.length; i++) {
     if (list[i].type == 'grid') {
       list[i].columns.forEach(item => {
@@ -41,11 +42,16 @@ export default function (data) {
 
   const blankList = []
 
-  findRemoteFunc(JSON.parse(data).list, funcList, tokenFuncList, blankList)
+  let main = JSON.parse(data).list
+  findRemoteFunc(main, funcList, tokenFuncList, blankList)
 
   let funcTemplate = ''
 
   let blankTemplate = ''
+
+  let mainTemplate = ''
+
+  let formValue = ''
 
   for(let i = 0; i < funcList.length; i++) {
     funcTemplate += `
@@ -76,45 +82,68 @@ export default function (data) {
     `
   }
 
-  return `<!DOCTYPE html>
-  <html>
-  <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-    <link rel="stylesheet" href="https://unpkg.com/form-making/dist/FormMaking.css">
-  </head>
-  <body>
+  for (let i = 0; i<main.length; i++){
+    mainTemplate += `
+      <el-form-item label="${main[i].name}" prop="${main[i].model}">
+        <el-input v-model="form.${main[i].model}" placeholder="${main[i].options['placeholder']}" style="width: ${main[i].options['width']}"></el-input>
+      </el-form-item>
+    `
+    formValue += `
+          ${main[i].model}: "${main[i].options['defaultValue']}",`
+  }
+
+  return `
+  <template>
     <div id="app">
+      <el-form ref="dataForm" :rules="rules" :model="form" label-position="right" v-loading="formLoading" element-loading-text="数据保存中...">
+        ${mainTemplate}
+      </el-form>
       <fm-generate-form :data="jsonData" :remote="remoteFuncs" :value="editData" ref="generateForm">
         ${blankTemplate}
       </fm-generate-form>
-      <el-button type="primary" @click="handleSubmit">提交</el-button>
+      <el-button @click="doCancel">取消</el-button>
+      <el-button type="primary" @click="doAdd">提交</el-button>
     </div>
-    <script src="https://unpkg.com/vue/dist/vue.js"></script>
-    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-    <script src="https://unpkg.com/form-making/dist/FormMaking.umd.js"></script>
-    <script>
-      new Vue({
-        el: '#app',
-        data: {
-          jsonData: ${data},
-          editData: {},
-          remoteFuncs: {
-            ${funcTemplate}
-          }
+  </template>
+
+  <script>
+  import {} from '@/' 
+  
+  export default {
+    props: {
+      action: {
+        type: String,
+        default: 'create'
+      },
+      editPaneData: {
+        type: Object,
+        default() { return {} }
+      },
+    },
+    components: {
+
+    },
+    data: function() {
+      return {
+        formLoading: false,
+        disabled: true,
+        rules: {},
+        form: {
+          id: 0,${formValue}
         },
-        methods: {
-          handleSubmit () {
-            this.$refs.generateForm.getData().then(data => {
-              // 数据校验成功
-              // data 为获取的表单数据
-            }).catch(e => {
-              // 数据校验失败
-            })
-          }
-        }
-      })
-    </script>
-  </body>
-  </html>`
+      },
+    },
+    watch: {},
+    mounted() {},
+    methods: {
+      doAdd() {
+
+      },  
+      doCancel() {
+        this.$emit('close')
+      },
+    },
+  }
+</script>
+`
 }
