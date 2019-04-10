@@ -83,11 +83,19 @@ export default function (data) {
   }
 
   for (let i = 0; i<main.length; i++){
-    mainTemplate += `
-      <el-form-item label="${main[i].name}" prop="${main[i].model}">
-        <el-input v-model="form.${main[i].model}" placeholder="${main[i].options['placeholder']}" style="width: ${main[i].options['width']}"></el-input>
-      </el-form-item>
-    `
+    if (main[i].type === "input"){
+      mainTemplate += `
+        <el-form-item label="${main[i].name}" prop="${main[i].model}">
+          <el-input v-model="form.${main[i].model}" placeholder="${main[i].options['placeholder']}" style="width: ${main[i].options['width']}"></el-input>
+        </el-form-item>
+      `
+    }else if (main[i].type === 'textarea'){
+      mainTemplate += `
+        <el-form-item label="${main[i].name}" prop="${main[i].model}">
+          <el-input v-model="form.${main[i].model}" placeholder="${main[i].options['placeholder']}" style="width: ${main[i].options['width']}" type="${main[i].type}"></el-input>
+        </el-form-item>
+      `
+    }
     formValue += `
           ${main[i].model}: "${main[i].options['defaultValue']}",`
   }
@@ -98,9 +106,6 @@ export default function (data) {
       <el-form ref="dataForm" :rules="rules" :model="form" label-position="right" v-loading="formLoading" element-loading-text="数据保存中...">
         ${mainTemplate}
       </el-form>
-      <fm-generate-form :data="jsonData" :remote="remoteFuncs" :value="editData" ref="generateForm">
-        ${blankTemplate}
-      </fm-generate-form>
       <el-button @click="doCancel">取消</el-button>
       <el-button type="primary" @click="doAdd">提交</el-button>
     </div>
