@@ -186,6 +186,19 @@
 
       </el-cascader>
     </template>
+
+    <template v-if="widget.type == 'book_base_cas'">
+      <el-cascader
+        v-model="dataModel"
+        :disabled="widget.options.disabled"
+        :clearable="widget.options.clearable"
+        :placeholder="widget.options.placeholder"
+        :style="{width: widget.options.width}"
+        :options="widget.options.remoteOptions"
+      >
+
+      </el-cascader>
+    </template>
   </el-form-item>
 </template>
 

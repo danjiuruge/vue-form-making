@@ -132,7 +132,7 @@
           :visible="codeVisible"
           @on-close="codeVisible = false"
           ref="codePreview"
-          width="800px"
+          width="1000px"
           form
           :action="false"
         >

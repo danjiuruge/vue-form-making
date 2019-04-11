@@ -283,6 +283,27 @@ export const advanceComponents = [
       },
       remoteFunc: ''
     }
+  },
+
+  {
+    type: 'book_base_cas',
+    name: '书籍基础分类级选',
+    icon: 'icon-jilianxuanze',
+    options: {
+      defaultValue: [],
+      width: '',
+      placeholder: '',
+      disabled: false,
+      clearable: false,
+      remote: true,
+      remoteOptions: [],
+      props: {
+        value: 'value',
+        label: 'label',
+        children: 'children'
+      },
+      remoteFunc: ''
+    }
   }
 ]
 

@@ -168,6 +168,19 @@
           </el-cascader>
         </template>
 
+        <template v-if="element.type == 'book_base_cas'">
+          <el-cascader
+            v-model="element.options.defaultValue"
+            :disabled="element.options.disabled"
+            :clearable="element.options.clearable"
+            :placeholder="element.options.placeholder"
+            :style="{width: element.options.width}"
+            :options="element.options.remoteOptions"
+          >
+
+          </el-cascader>
+        </template>
+
         <template v-if="element.type == 'editor'">
           <fm-editor
             v-model="element.options.defaultValue"
