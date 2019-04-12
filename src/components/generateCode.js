@@ -74,11 +74,14 @@ export default function (data) {
 
   const AT = []
   packListData(main, mainTemplate_c, formValue_c, plugin_c, plugin_import_c, formRule_c, AT)
-  mainTemplate = AT[0].join('')
-  formValue = AT[1].join('')
-  plugin = AT[2].join('')
-  plugin_import = AT[3].join('')
-  formRule = AT[4].join('')
+  if (AT.length > 0)
+  {
+    mainTemplate = AT[0].join('')
+    formValue = AT[1].join('')
+    plugin = AT[2].join('')
+    plugin_import = AT[3].join('')
+    formRule = AT[4].join('')
+  }
 
   return `
   <template>
