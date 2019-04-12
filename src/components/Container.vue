@@ -486,7 +486,7 @@ export default {
   },
   methods: {
     handleGoGithub () {
-      window.location.href = 'https://github.com/danjiuruge/vue-form-making'
+      window.location.href = 'https://github.com/GavinZhuLei/vue-form-making'
     },
     handleConfigSelect (value) {
       this.configTab = value
