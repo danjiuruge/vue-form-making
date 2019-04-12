@@ -58,6 +58,8 @@ export default function (data) {
 
   let plugin_import = ''
 
+  let formRule = ''
+
   for(let i = 0; i < funcList.length; i++) {
     funcTemplate += `
             ${funcList[i].func} (resolve) {
@@ -105,14 +107,23 @@ export default function (data) {
     }else if (main[i].type === 'book_base_cas'){
       mainTemplate += `
         <el-form-item label="${main[i].name}" prop="${main[i].model}">
-          <ShowCategoryCascaderComponent :clearable="true" class="filter-item" v-model="form.${main[i].model}"
-            placeholder="${main[i].options['placeholder']}" style="width: ${main[i].options['width']}" :change-on-select="true" />
+          <ShowCategoryCascaderComponent :clearable="${main[i].options['clearable']}" class="filter-item" v-model="form.${main[i].model}"
+            placeholder="${main[i].options['placeholder']}" style="width: ${main[i].options['width']}" :change-on-select="true" 
+            :disabled="${main[i].options['disabled']}" />
         </el-form-item> 
       `
       plugin += `
   import ShowCategoryCascaderComponent from '@/views/components/cascaders/BookShowCategoryCascader`
       plugin_import += `
       ShowCategoryCascaderComponent`
+    }
+    for (let k = 0; k<main[i]['rules'].length; k++)
+    {
+      let temp = main[i]['rules'][k]
+      if (temp.hasOwnProperty("required")){
+        formRule += `
+          "${main[i].model}": [{ required: ${temp['required']}, message: "${main[i]['model']}必填", trigger: 'blur' },],`
+      }
     }
     formValue += `
           ${main[i].model}: "${main[i].options['defaultValue']}",`
@@ -150,7 +161,8 @@ export default function (data) {
       return {
         formLoading: false,
         disabled: true,
-        rules: {},
+        rules: {${formRule}
+        },
         form: {
           id: 0,${formValue}
         },
