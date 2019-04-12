@@ -13,42 +13,42 @@ function packListData(main, mainTemplate_c, formValue_c, plugin_c, plugin_import
       mainTemplate_c.push(`
         </el-row>`)
     } else {
-    if (main[i].type === "input"){
-      mainTemplate_c.push(`
+      if (main[i].type === "input"){
+        mainTemplate_c.push(`
             <el-form-item label="${main[i].name}" prop="${main[i].model}">
               <el-input v-model="form.${main[i].model}" placeholder="${main[i].options['placeholder']}"
               style="width: ${main[i].options['width']}"></el-input>
             </el-form-item>`)
-    }else if (main[i].type === 'textarea'){
-      mainTemplate_c.push(`
+      }else if (main[i].type === 'textarea'){
+        mainTemplate_c.push(`
             <el-form-item label="${main[i].name}" prop="${main[i].model}">
               <el-input v-model="form.${main[i].model}" placeholder="${main[i].options['placeholder']}"
               style="width: ${main[i].options['width']}" type="${main[i].type}"></el-input>
             </el-form-item>`)
-    }else if (main[i].type === 'book_base_cas'){
-      mainTemplate_c.push(`
+      }else if (main[i].type === 'book_base_cas'){
+        mainTemplate_c.push(`
             <el-form-item label="${main[i].name}" prop="${main[i].model}">
               <ShowCategoryCascaderComponent :clearable="${main[i].options['clearable']}" class="filter-item" v-model="form.${main[i].model}"
                 placeholder="${main[i].options['placeholder']}" style="width: ${main[i].options['width']}" :change-on-select="true" 
                 :disabled="${main[i].options['disabled']}" />
             </el-form-item>`)
-      plugin_c.push(`
-  import ShowCategoryCascaderComponent from '@/views/components/cascaders/BookShowCategoryCascader`)
-      plugin_import_c.push(`
+        plugin_c.push(`
+  import ShowCategoryCascaderComponent from '@/views/components/cascaders/BookShowCategoryCascader'`)
+        plugin_import_c.push(`
       ShowCategoryCascaderComponent`)
-    }
-    for (let k = 0; k<main[i]['rules'].length; k++)
-    {
-      let temp = main[i]['rules'][k]
-      if (temp.hasOwnProperty("required")){
-        formRule_c.push(`
-          "${main[i].model}": [{ required: ${temp['required']}, message: "${main[i]['model']}必填", trigger: 'blur' },],`)
       }
-    }
-    formValue_c.push(`
+      for (let k = 0; k<main[i]['rules'].length; k++)
+      {
+        let temp = main[i]['rules'][k]
+        if (temp.hasOwnProperty("required")){
+          formRule_c.push(`
+          "${main[i].model}": [{ required: ${temp['required']}, message: "${main[i]['model']}必填", trigger: 'blur' },],`)
+        }
+      }
+      formValue_c.push(`
           ${main[i].model}: "${main[i].options['defaultValue']}",`)
-  AT.push(mainTemplate_c, formValue_c, plugin_c, plugin_import_c, formRule_c)
-  }
+      AT.push(mainTemplate_c, formValue_c, plugin_c, plugin_import_c, formRule_c)
+    }
   }
 }
 
