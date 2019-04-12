@@ -486,22 +486,21 @@ export default {
   },
   methods: {
     handleGoGithub () {
-      window.location.href = 'https://github.com/GavinZhuLei/vue-form-making'
+      window.location.href = 'https://github.com/danjiuruge/vue-form-making'
     },
     handleConfigSelect (value) {
       this.configTab = value
     },
     handleMoveEnd (evt) {
-      console.log('end', evt)
+      //console.log('end', evt)
     },
     handleMoveStart ({oldIndex}) {
-      console.log('start', oldIndex, this.basicComponents)
+      //console.log('start', oldIndex, this.basicComponents)
     },
     handleMove () {
       return true
     },
     handlePreview () {
-      console.log(this.widgetForm)
       this.previewVisible = true
     },
     handleTest () {
@@ -515,7 +514,7 @@ export default {
     handleGenerateJson () {
       this.jsonVisible = true
       this.jsonTemplate = this.widgetForm
-      console.log(JSON.stringify(this.widgetForm))
+      //console.log(JSON.stringify(this.widgetForm))
       this.$nextTick(() => {
 
         const editor = ace.edit('jsoneditor')
@@ -562,7 +561,7 @@ export default {
       }
     },
     handleInput (val) {
-      console.log(val)
+      //console.log(val)
       this.blank = val
     }
   },
@@ -570,7 +569,7 @@ export default {
     widgetForm: {
       deep: true,
       handler: function (val) {
-        console.log(this.$refs.widgetForm)
+        //console.log(this.$refs.widgetForm)
       }
     }
   }

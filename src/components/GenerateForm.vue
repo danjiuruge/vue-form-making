@@ -127,7 +127,7 @@ export default {
     value: {
       deep: true,
       handler (val) {
-        console.log(JSON.stringify(val))
+        //console.log(JSON.stringify(val))
         this.models = {...this.models, ...val}
       }
     }
