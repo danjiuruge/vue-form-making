@@ -1,140 +1,90 @@
-function findRemoteFunc (list, funcList, tokenFuncList, blankList) {
-  console.log(list)
-  for (let i = 0; i < list.length; i++) {
-    if (list[i].type == 'grid') {
-      list[i].columns.forEach(item => {
-        findRemoteFunc(item.list, funcList, tokenFuncList, blankList)
-      })
-    } else {
-      if (list[i].type == 'blank') {
-        if (list[i].model) {
-          blankList.push({
-            name: list[i].model,
-            label: list[i].name
-          })
-        }
-      } else if (list[i].type == 'imgupload') {
-        if (list[i].options.tokenFunc) {
-          tokenFuncList.push({
-            func: list[i].options.tokenFunc,
-            label: list[i].name,
-            model: list[i].model
-          })
-        }
-      } else {
-        if (list[i].options.remote && list[i].options.remoteFunc) {
-          funcList.push({
-            func: list[i].options.remoteFunc,
-            label: list[i].name,
-            model: list[i].model
-          })
-        }
-      }
-    }
-  }
-}
-
-export default function (data) {
-
-  const funcList = []
-
-  const tokenFuncList = []
-
-  const blankList = []
-
-  let main = JSON.parse(data).list
-  let config = JSON.parse(data).config
-  findRemoteFunc(main, funcList, tokenFuncList, blankList)
-
-  let funcTemplate = ''
-
-  let blankTemplate = ''
-
-  let mainTemplate = ''
-
-  let formValue = ''
-
-  let plugin = ''
-
-  let plugin_import = ''
-
-  let formRule = ''
-
-  for(let i = 0; i < funcList.length; i++) {
-    funcTemplate += `
-            ${funcList[i].func} (resolve) {
-              // ${funcList[i].label} ${funcList[i].model}
-              // 获取到远端数据后执行回调函数
-              // resolve(data)
-            },
-    `
-  }
-
-  for(let i = 0; i < tokenFuncList.length; i++) {
-    funcTemplate += `
-            ${tokenFuncList[i].func} (resolve) {
-              // ${tokenFuncList[i].label} ${tokenFuncList[i].model}
-              // 获取到token数据后执行回调函数
-              // resolve(token)
-            },
-    `
-  }
-
-  for (let i = 0; i < blankList.length; i++) {
-    blankTemplate += `
-        <template slot="${blankList[i].name}" slot-scope="scope">
-          <!-- ${blankList[i].label} -->
-          <!-- 通过 v-model="scope.model.${blankList[i].name}" 绑定数据 -->
-        </template>
-    `
-  }
-
+function packListData(main, mainTemplate_c, formValue_c, plugin_c, plugin_import_c, formRule_c, AT){
   for (let i = 0; i<main.length; i++){
+    if (main[i].type === 'grid'){
+      mainTemplate_c.push(`
+        <el-row :gutter="${main[i].options['gutter']}">`)
+      main[i].columns.forEach(item => {
+        mainTemplate_c.push(`
+          <el-col :span="${item.span}">`)
+        packListData(item.list, mainTemplate_c, formValue_c, plugin_c, plugin_import_c, formRule_c, AT)
+        mainTemplate_c.push(`
+          </el-col>`)
+      })
+      mainTemplate_c.push(`
+        </el-row>`)
+    } else {
     if (main[i].type === "input"){
-      mainTemplate += `
-        <el-form-item label="${main[i].name}" prop="${main[i].model}">
-          <el-input v-model="form.${main[i].model}" placeholder="${main[i].options['placeholder']}"
-          style="width: ${main[i].options['width']}"></el-input>
-        </el-form-item>
-      `
+      mainTemplate_c.push(`
+            <el-form-item label="${main[i].name}" prop="${main[i].model}">
+              <el-input v-model="form.${main[i].model}" placeholder="${main[i].options['placeholder']}"
+              style="width: ${main[i].options['width']}"></el-input>
+            </el-form-item>`)
     }else if (main[i].type === 'textarea'){
-      mainTemplate += `
-        <el-form-item label="${main[i].name}" prop="${main[i].model}">
-          <el-input v-model="form.${main[i].model}" placeholder="${main[i].options['placeholder']}"
-          style="width: ${main[i].options['width']}" type="${main[i].type}"></el-input>
-        </el-form-item>
-      `
+      mainTemplate_c.push(`
+            <el-form-item label="${main[i].name}" prop="${main[i].model}">
+              <el-input v-model="form.${main[i].model}" placeholder="${main[i].options['placeholder']}"
+              style="width: ${main[i].options['width']}" type="${main[i].type}"></el-input>
+            </el-form-item>`)
     }else if (main[i].type === 'book_base_cas'){
-      mainTemplate += `
-        <el-form-item label="${main[i].name}" prop="${main[i].model}">
-          <ShowCategoryCascaderComponent :clearable="${main[i].options['clearable']}" class="filter-item" v-model="form.${main[i].model}"
-            placeholder="${main[i].options['placeholder']}" style="width: ${main[i].options['width']}" :change-on-select="true" 
-            :disabled="${main[i].options['disabled']}" />
-        </el-form-item> 
-      `
-      plugin += `
-  import ShowCategoryCascaderComponent from '@/views/components/cascaders/BookShowCategoryCascader`
-      plugin_import += `
-      ShowCategoryCascaderComponent`
+      mainTemplate_c.push(`
+            <el-form-item label="${main[i].name}" prop="${main[i].model}">
+              <ShowCategoryCascaderComponent :clearable="${main[i].options['clearable']}" class="filter-item" v-model="form.${main[i].model}"
+                placeholder="${main[i].options['placeholder']}" style="width: ${main[i].options['width']}" :change-on-select="true" 
+                :disabled="${main[i].options['disabled']}" />
+            </el-form-item>`)
+      plugin_c.push(`
+  import ShowCategoryCascaderComponent from '@/views/components/cascaders/BookShowCategoryCascader`)
+      plugin_import_c.push(`
+      ShowCategoryCascaderComponent`)
     }
     for (let k = 0; k<main[i]['rules'].length; k++)
     {
       let temp = main[i]['rules'][k]
       if (temp.hasOwnProperty("required")){
-        formRule += `
-          "${main[i].model}": [{ required: ${temp['required']}, message: "${main[i]['model']}必填", trigger: 'blur' },],`
+        formRule_c.push(`
+          "${main[i].model}": [{ required: ${temp['required']}, message: "${main[i]['model']}必填", trigger: 'blur' },],`)
       }
     }
-    formValue += `
-          ${main[i].model}: "${main[i].options['defaultValue']}",`
+    formValue_c.push(`
+          ${main[i].model}: "${main[i].options['defaultValue']}",`)
+  AT.push(mainTemplate_c, formValue_c, plugin_c, plugin_import_c, formRule_c)
   }
+  }
+}
+
+export default function (data) {
+
+  let main = JSON.parse(data).list
+  let config = JSON.parse(data).config
+
+  const mainTemplate_c = [] 
+  let mainTemplate = ''
+
+  const formValue_c = []
+  let formValue = ''
+
+  const plugin_c = []
+  let plugin = ''
+
+  const plugin_import_c = []
+  let plugin_import = ''
+
+  const formRule_c = []
+  let formRule = ''
+
+  const AT = []
+  packListData(main, mainTemplate_c, formValue_c, plugin_c, plugin_import_c, formRule_c, AT)
+  mainTemplate = AT[0].join('')
+  formValue = AT[1].join('')
+  plugin = AT[2].join('')
+  plugin_import = AT[3].join('')
+  formRule = AT[4].join('')
 
   return `
   <template>
     <div id="app">
       <el-form ref="dataForm" :rules="rules" :model="form" label-position="${config['labelPosition']}"
-        labelWidth="${config['labelWidth']}" v-loading="formLoading" element-loading-text="数据保存中...">
-        ${mainTemplate}
+        labelWidth="${config['labelWidth']}" v-loading="formLoading" element-loading-text="数据保存中...">${mainTemplate}
       </el-form>
       <el-button @click="doCancel">取消</el-button>
       <el-button type="primary" @click="doAdd">提交</el-button>
