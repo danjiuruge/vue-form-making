@@ -302,7 +302,7 @@
           <div>
             <el-checkbox v-model="data.options.required">必填</el-checkbox>
           </div>
-          <el-select v-if="Object.keys(data.options).indexOf('dataType')>=0" v-model="data.options.dataType" size="mini" >
+          <!-- el-select v-if="Object.keys(data.options).indexOf('dataType')>=0" v-model="data.options.dataType" size="mini" >
             <el-option value="string" label="字符串"></el-option>
             <el-option value="number" label="数字"></el-option>
             <el-option value="boolean" label="布尔值"></el-option>
@@ -311,11 +311,11 @@
             <el-option value="url" label="URL地址"></el-option>
             <el-option value="email" label="邮箱地址"></el-option>
             <el-option value="hex" label="十六进制"></el-option>
-          </el-select>
+          </el-select -->
           
-          <div v-if="Object.keys(data.options).indexOf('pattern')>=0">
+          <!-- div v-if="Object.keys(data.options).indexOf('pattern')>=0">
             <el-input size="mini" v-model.lazy="data.options.pattern"  style=" width: 240px;" placeholder="填写正则表达式"></el-input>
-          </div>
+          </div -->
         </el-form-item>
       </template>
     </el-form>
