@@ -23,7 +23,7 @@ function packListData(main, mainTemplate_c, formValue_c, plugin_c, plugin_import
         mainTemplate_c.push(`
             <el-form-item label="${main[i].name}" prop="${main[i].model}">
               <el-input-number v-model="form.${main[i].model}"
-              style="width: ${main[i].options.width}" :min="${main[i].options.min}" :max="${main[i].options.max}"
+              style="width: ${main[i].options.width}" :min=${main[i].options.min} :max=${main[i].options.max}
               :step="${main[i].options.step}" :disabled="${main[i].options.disabled}"></el-input-number>
             </el-form-item>`)
       }else if (main[i].type === 'textarea'){
@@ -61,7 +61,7 @@ function packListData(main, mainTemplate_c, formValue_c, plugin_c, plugin_import
           option_c.push(`
         options_${main[i].model}: [],`)
           remote_c.push(`
-      def ${main[i].options.remoteFunc}(){
+      ${main[i].options.remoteFunc}(){
         this.options_${main[i].model} = ###Api.${main[i].options.remoteFunc}.data
       },`)
           func_c.push(`
@@ -96,7 +96,7 @@ function packListData(main, mainTemplate_c, formValue_c, plugin_c, plugin_import
           option_c.push(`
         options_${main[i].model}: [],`)
           remote_c.push(`
-      def ${main[i].options.remoteFunc}(){
+      ${main[i].options.remoteFunc}(){
         this.options_${main[i].model} = ###Api.${main[i].options.remoteFunc}.data
       },`)
           func_c.push(`
@@ -105,9 +105,9 @@ function packListData(main, mainTemplate_c, formValue_c, plugin_c, plugin_import
       }else if (main[i].type === 'time'){
         mainTemplate_c.push(`
             <el-form-item label="${main[i].name}" prop="${main[i].model}">
-              <el-date-picker :clearable="${main[i].options.clearable}" v-model="form.${main[i].model}"
-                style="width: ${main[i].options.width}" type="${main[i].type}" is-range="${main[i].options.isRange}"
-                ></el-date-picker>
+              <el-time-picker :clearable="${main[i].options.clearable}" v-model="form.${main[i].model}"
+                style="width: ${main[i].options.width}" type="${main[i].type}" :is-range="${main[i].options.isRange}"
+                :arrowControl="${main[i].options.arrowControl}"></el-time-picker>
             </el-form-item>`)
       }else if (main[i].type === 'date'){
         mainTemplate_c.push(`
@@ -121,8 +121,8 @@ function packListData(main, mainTemplate_c, formValue_c, plugin_c, plugin_import
       }else if (main[i].type === 'rate'){
         mainTemplate_c.push(`
             <el-form-item label="${main[i].name}" prop="${main[i].model}">
-              <el-rate v-model="form.${main[i].model}" allow-half="${main[i].options.allowHalf}"
-                max="${main[i].options.max}" :disabled="${main[i].options.disabled}" 
+              <el-rate v-model="form.${main[i].model}" :allow-half=${main[i].options.allowHalf}
+                :max=${main[i].options.max} :disabled="${main[i].options.disabled}" 
                 ></el-rate>
             </el-form-item>`)
       }else if (main[i].type === 'color'){
@@ -137,13 +137,13 @@ function packListData(main, mainTemplate_c, formValue_c, plugin_c, plugin_import
             <el-form-item label="${main[i].name}" prop="${main[i].model}">
               <el-cascader v-model="form.${main[i].model}" style="width: ${main[i].options.width}"
                 :clearable="${main[i].options.clearable}" :disabled="${main[i].options.disabled}"
-                :placeholder="${main[i].options.placeholder}" :options="options_${main[i].model}" change-on-select>
+                placeholder="${main[i].options.placeholder}" :options="options_${main[i].model}" change-on-select>
               </el-cascader>
             </el-form-item>`)
           option_c.push(`
         options_${main[i].model}: [],`)
           remote_c.push(`
-      def ${main[i].options.remoteFunc}(){
+      ${main[i].options.remoteFunc}(){
         this.options_${main[i].model} = ###Api.${main[i].options.remoteFunc}.data
       },`)
           func_c.push(`
@@ -154,7 +154,7 @@ function packListData(main, mainTemplate_c, formValue_c, plugin_c, plugin_import
             <el-form-item label="${main[i].name}" prop="${main[i].model}">
               <el-select v-model="form.${main[i].model}" style="width: ${main[i].options.width}"
                 :clearable="${main[i].options.clearable}" :disabled="${main[i].options.disabled}"
-                :multiple="${main[i].options.multiple}" :placeholder="${main[i].options.placeholder}">
+                :multiple="${main[i].options.multiple}" placeholder="${main[i].options.placeholder}">
                 <el-option
                   :label="item.label" v-for="(item, index) in options_${main[i].model}" :key="item.value" :value="item.value"
                 ></el-option>
@@ -169,7 +169,7 @@ function packListData(main, mainTemplate_c, formValue_c, plugin_c, plugin_import
             <el-form-item label="${main[i].name}" prop="${main[i].model}">
               <el-select v-model="form.${main[i].model}" style="width: ${main[i].options.width}"
                 :clearable="${main[i].options.clearable}" :disabled="${main[i].options.disabled}"
-                :multiple="${main[i].options.multiple}" :placeholder="${main[i].options.placeholder}">
+                :multiple="${main[i].options.multiple}" placeholder="${main[i].options.placeholder}">
                 <el-option
                   :label="item.${main[i].options.props.label}" v-for="(item, index) in options_${main[i].model}"
                   :key="item.${main[i].options.props.value}" :value="item.${main[i].options.props.value}" 
@@ -179,7 +179,7 @@ function packListData(main, mainTemplate_c, formValue_c, plugin_c, plugin_import
           option_c.push(`
         options_${main[i].model}: [],`)
           remote_c.push(`
-      def ${main[i].options.remoteFunc}(){
+      ${main[i].options.remoteFunc}(){
         this.options_${main[i].model} = ###Api.${main[i].options.remoteFunc}.data
       },`)
           func_c.push(`
@@ -193,7 +193,7 @@ function packListData(main, mainTemplate_c, formValue_c, plugin_c, plugin_import
       }else if (main[i].type === 'slider'){
         mainTemplate_c.push(`
             <el-form-item label="${main[i].name}" prop="${main[i].model}">
-              <el-slider v-model="form.${main[i].model}" :min="${main[i].options.min}" :max="${main[i].options.max}"
+              <el-slider v-model="form.${main[i].model}" :min=${main[i].options.min} :max=${main[i].options.max}
                 :step="${main[i].options.step}" style="width: ${main[i].options.width}"
                 :show-input="${main[i].options.showInput}" :disabled="${main[i].options.disabled}"
                 :range="${main[i].options.range}"></el-slider>
@@ -243,29 +243,29 @@ function packListData(main, mainTemplate_c, formValue_c, plugin_c, plugin_import
                 placeholder="仅支持${main[i].options.size.max}M内的jpg/png文件且分辨率${main[i].options.size.width} * ${main[i].options.size.height}的图片" style="width: ${main[i].options.width}" />
             </el-form-item>`)
         plugin_c.push(`
-  import ImageUploadComponent from '@/views/components/uploads/uploads/ImageUploadComponent`)
+  import ImageUploadComponent from '@/views/components/uploads/imageUpload'`)
         plugin_import_c.push(`
       ImageUploadComponent,`)
       }else if (main[i].type === 'editor'){
         mainTemplate_c.push(`
             <el-form-item label="${main[i].name}" prop="${main[i].model}">
               <RichText v-model="form.${main[i].model}"
-              style="width: ${main[i].options.width}" :inputStyle="inputStyle"/>
+              style="width: ${main[i].options.width}"/>
             </el-form-item>`)
         plugin_c.push(`
-  import RichText from '@/components/RichTextEditor`)
+  import RichText from '@/components/RichTextEditor'`)
         plugin_import_c.push(`
       RichText,`)
       }else if (main[i].type === 'copyright_select'){
         mainTemplate_c.push(`
             <el-form-item label="${main[i].name}" prop="${main[i].model}">
               <copyRightSelectComponent :clearable="${main[i].options.clearable}" v-model="form.${main[i].model}"
-                placeholder="${main[i].options.placeholder}" :opstyle="{width: ${main[i].options.width}}"
+                placeholder="${main[i].options.placeholder}" :opstyle="{width: '${main[i].options.width}'}"
                 :disabled="${main[i].options.disabled}" :multiple="${main[i].options.multiple}"
                 :filterable="${main[i].options.filterable}"/>
             </el-form-item>`)
         plugin_c.push(`
-  import copyRightSelectComponent from '@/views/components/selects/copyRightSelectComponent'`)
+  import copyRightSelectComponent from '@/views/components/selects/copyrightSelect'`)
         plugin_import_c.push(`
       copyRightSelectComponent,`)
       }
@@ -278,8 +278,15 @@ function packListData(main, mainTemplate_c, formValue_c, plugin_c, plugin_import
         }
       }
       let temp = JSON.stringify(main[i].options.defaultValue)
-      formValue_c.push(`
+      if (main[i].type === 'imgupload')
+      {
+        formValue_c.push(`
+      ${main[i].model}: "",`)
+      }
+      else{
+        formValue_c.push(`
       ${main[i].model}: ${temp},`)
+      }
       AT.push(mainTemplate_c, formValue_c, plugin_c, plugin_import_c, formRule_c, option_c, remote_c, func_c)
     }
   }
@@ -331,13 +338,17 @@ export default function (data) {
 
   return `
   <template>
-    <div id="app">
-      <el-form ref="editForm" :rules="rules" :model="form" label-position="${config['labelPosition']}"
-        labelWidth="${config['labelWidth']}" v-loading="formLoading" element-loading-text="数据保存中...">${mainTemplate}
-      </el-form>
-      <el-button @click="cancel">取消</el-button>
-      <el-button type="primary" @click="submit">提交</el-button>
-    </div>
+    <el-card class="box-card">
+      <div>
+        <el-form class="form-container" ref="editForm" :rules="rules" :model="form"
+          labelWidth="${config.labelWidth}" v-loading="formLoading" element-loading-text="数据保存中...">${mainTemplate}
+        </el-form>
+        <div align="right">
+          <el-button @click="cancel">取消</el-button>
+          <el-button type="primary" @click="submit">提交</el-button>
+        </div>
+      </div>
+    </el-card>
   </template>
 
   <script>
@@ -364,7 +375,7 @@ export default function (data) {
         rules: {${formRule}
         },
         form: getDefaultData(),
-      },
+      }
     },
     created() {
 

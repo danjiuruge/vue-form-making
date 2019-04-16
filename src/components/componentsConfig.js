@@ -9,7 +9,7 @@ export const basicComponents = [
       required: false,
       dataType: 'string',
       pattern: '',
-      placeholder: ''
+      placeholder: '请输入'
     }
   },
   {
@@ -22,7 +22,7 @@ export const basicComponents = [
       required: false,
       disabled: false,
       pattern: '',
-      placeholder: ''
+      placeholder: '请输入'
     }
   },
   {
@@ -30,11 +30,11 @@ export const basicComponents = [
     name: '计数器',
     icon: 'icon-number',
     options: {
-      width: '',
+      width: '100%',
       required: false,
       defaultValue: 0,
-      min: '',
-      max: '',
+      min: 0,
+      max: 10,
       step: 1,
       disabled: false,
       controlsPosition: ''
@@ -63,7 +63,7 @@ export const basicComponents = [
         }
       ],
       required: false,
-      width: '',
+      width: '100%',
       remote: false,
       remoteOptions: [],
       props: {
@@ -83,17 +83,20 @@ export const basicComponents = [
       showLabel: false,
       options: [
         {
-          value: '选项1'
+          value: '选项1',
+          label: '选项1'
         },
         {
-          value: '选项2'
+          value: '选项2',
+          label: '选项2'
         },
         {
-          value: '选项3'
+          value: '选项3',
+          label: '选项3'
         }
       ],
       required: false,
-      width: '',
+      width: '100%',
       remote: false,
       remoteOptions: [],
       props: {
@@ -120,7 +123,7 @@ export const basicComponents = [
       arrowControl: true,
       format: 'HH:mm:ss',
       required: false,
-      width: '',
+      width: '100%',
     }
   },
   {
@@ -134,13 +137,13 @@ export const basicComponents = [
       editable: true,
       clearable: true,
       placeholder: '',
-      startPlaceholder: '',
-      endPlaceholder: '',
+      startPlaceholder: '开始时间',
+      endPlaceholder: '结束时间',
       type: 'date',
       format: 'yyyy-MM-dd',
       timestamp: false,
       required: false,
-      width: '',
+      width: '100%',
     }
   },
   {
@@ -175,18 +178,21 @@ export const basicComponents = [
       multiple: false,
       disabled: false,
       clearable: false,
-      placeholder: '',
+      placeholder: '请选择',
       required: false,
       showLabel: false,
-      width: '',
+      width: '100%',
       options: [
         {
-          value: '下拉框1'
+          value: '下拉框1',
+          label: '下拉框1'
         },
         {
-          value: '下拉框2'
+          value: '下拉框2',
+          label: '下拉框2'
         },{
-          value: '下拉框3'
+          value: '下拉框3',
+          label: '下拉框3'
         }
       ],
       remote: false,
@@ -222,7 +228,7 @@ export const basicComponents = [
       step: 1,
       showInput: false,
       range: false,
-      width: ''
+      width: '100%'
     }
   }
 ]
@@ -247,7 +253,7 @@ export const advanceComponents = [
         height: 100,
         max: 5,
       },
-      width: '',
+      width: '100%',
       //tokenFunc: 'funcGetToken',
       //token: '',
       //domain: 'http://pfp81ptt6.bkt.clouddn.com/',
@@ -262,7 +268,7 @@ export const advanceComponents = [
     icon: 'icon-fuwenbenkuang',
     options: {
       defaultValue: '',
-      width: ''
+      width: '100%'
     }
   },
   {
@@ -271,8 +277,8 @@ export const advanceComponents = [
     icon: 'icon-jilianxuanze',
     options: {
       defaultValue: [],
-      width: '',
-      placeholder: '',
+      width: '100%',
+      placeholder: '请选择',
       disabled: false,
       clearable: false,
       remote: true,
@@ -292,8 +298,8 @@ export const advanceComponents = [
     icon: 'icon-jilianxuanze',
     options: {
       defaultValue: [],
-      width: '',
-      placeholder: '',
+      width: '100%',
+      placeholder: '请选择',
       disabled: false,
       clearable: false,
       remote: true,
@@ -312,8 +318,8 @@ export const advanceComponents = [
     icon: 'icon-jilianxuanze',
     options: {
       defaultValue: [],
-      width: '',
-      placeholder: '',
+      width: '100%',
+      placeholder: '请选择',
       disabled: false,
       clearable: false,
       remote: true,
@@ -336,7 +342,7 @@ export const advanceComponents = [
       required: false,
       disabled: false,
       pattern: '',
-      placeholder: ''
+      placeholder: '请输入'
     }
   },
   {
@@ -348,9 +354,9 @@ export const advanceComponents = [
       multiple: true,
       disabled: false,
       clearable: false,
-      placeholder: '',
+      placeholder: '请选择',
       required: false,
-      width: '',
+      width: '100%',
       filterable: true,
     }
   },
