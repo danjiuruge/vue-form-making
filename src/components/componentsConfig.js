@@ -339,6 +339,21 @@ export const advanceComponents = [
       placeholder: ''
     }
   },
+  {
+    type: 'copyright_select',
+    name: '版权方下拉选择框',
+    icon: 'icon-select',
+    options: {
+      defaultValue: [],
+      multiple: true,
+      disabled: false,
+      clearable: false,
+      placeholder: '',
+      required: false,
+      width: '',
+      filterable: true,
+    }
+  },
 ]
 
 export const layoutComponents = [

@@ -38,10 +38,10 @@
       <el-form-item label="步长" v-if="Object.keys(data.options).indexOf('step')>=0">
         <el-input-number v-model="data.options.step" :min="0" :max="100" :step="1"></el-input-number>
       </el-form-item>
-      <el-form-item label="是否多选" v-if="data.type=='select'">
+      <el-form-item label="是否多选" v-if="data.type=='select' || data.type == 'copyright_select'">
         <el-switch v-model="data.options.multiple" @change="handleSelectMuliple"></el-switch>
       </el-form-item>
-      <el-form-item label="是否可搜索" v-if="data.type=='select'">
+      <el-form-item label="是否可搜索" v-if="data.type=='select' || data.type== 'copyright_select'">
         <el-switch v-model="data.options.filterable"></el-switch>
       </el-form-item>
       <el-form-item label="允许半选" v-if="Object.keys(data.options).indexOf('allowHalf')>=0">

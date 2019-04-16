@@ -201,6 +201,18 @@
           ></el-input>
         </template>
 
+        <template v-if="element.type == 'copyright_select'">
+          <el-select
+            v-model="element.options.defaultValue"
+            :disabled="element.options.disabled"
+            :multiple="element.options.multiple"
+            :clearable="element.options.clearable"
+            :placeholder="element.options.placeholder"
+            :style="{width: element.options.width}"
+          >
+          </el-select>
+        </template>
+
         <template v-if="element.type == 'editor'">
           <fm-editor
             v-model="element.options.defaultValue"

@@ -219,6 +219,19 @@
         :style="{width: widget.options.width}"
       ></el-input>
     </template>
+
+    <template v-if="widget.type == 'copyright_select'">
+      <el-select
+        v-model="dataModel"
+        :disabled="widget.options.disabled"
+        :multiple="widget.options.multiple"
+        :clearable="widget.options.clearable"
+        :placeholder="widget.options.placeholder"
+        :style="{width: widget.options.width}"
+        :filterable="widget.options.filterable"
+      >
+      </el-select>
+    </template>
   </el-form-item>
 </template>
 

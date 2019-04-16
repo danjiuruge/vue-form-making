@@ -256,6 +256,18 @@ function packListData(main, mainTemplate_c, formValue_c, plugin_c, plugin_import
   import RichText from '@/components/RichTextEditor`)
         plugin_import_c.push(`
       RichText,`)
+      }else if (main[i].type === 'copyright_select'){
+        mainTemplate_c.push(`
+            <el-form-item label="${main[i].name}" prop="${main[i].model}">
+              <copyRightSelectComponent :clearable="${main[i].options.clearable}" v-model="form.${main[i].model}"
+                placeholder="${main[i].options.placeholder}" :opstyle="{width: ${main[i].options.width}}"
+                :disabled="${main[i].options.disabled}" :multiple="${main[i].options.multiple}"
+                :filterable="${main[i].options.filterable}"/>
+            </el-form-item>`)
+        plugin_c.push(`
+  import copyRightSelectComponent from '@/views/components/selects/copyRightSelectComponent'`)
+        plugin_import_c.push(`
+      copyRightSelectComponent,`)
       }
       for (let k = 0; k<main[i].rules.length; k++)
       {
@@ -267,7 +279,7 @@ function packListData(main, mainTemplate_c, formValue_c, plugin_c, plugin_import
       }
       let temp = JSON.stringify(main[i].options.defaultValue)
       formValue_c.push(`
-          ${main[i].model}: ${temp},`)
+      ${main[i].model}: ${temp},`)
       AT.push(mainTemplate_c, formValue_c, plugin_c, plugin_import_c, formRule_c, option_c, remote_c, func_c)
     }
   }
@@ -320,51 +332,87 @@ export default function (data) {
   return `
   <template>
     <div id="app">
-      <el-form ref="dataForm" :rules="rules" :model="form" label-position="${config['labelPosition']}"
+      <el-form ref="editForm" :rules="rules" :model="form" label-position="${config['labelPosition']}"
         labelWidth="${config['labelWidth']}" v-loading="formLoading" element-loading-text="数据保存中...">${mainTemplate}
       </el-form>
-      <el-button @click="doCancel">取消</el-button>
-      <el-button type="primary" @click="doAdd">提交</el-button>
+      <el-button @click="cancel">取消</el-button>
+      <el-button type="primary" @click="submit">提交</el-button>
     </div>
   </template>
 
   <script>
   ${plugin}
   import {###Api} from '@/###'
-  
+
+  function getDefaultData() {
+    return {
+      id:0,${formValue}
+    }
+  }
+
   export default {
     props: {
-      action: {
-        type: String,
-        default: 'create'
-      },
-      editPaneData: {
-        type: Object,
-        default() { return {} }
-      },
+      value: Object,
     },
     components: {${plugin_import}
     },
-    data: function() {
+    data() {
       return {
         formLoading: false,
         disabled: true,
         ${option}
         rules: {${formRule}
         },
-        form: {
-          id: 0,${formValue}
-        },
+        form: getDefaultData(),
       },
     },
-    watch: {},
+    created() {
+
+    },
+    watch: {
+      value: {
+        immediate: true,
+        handler() {
+          if (this.value && this.value.id) {
+            ###Api.one({'id': this.value.id}).then((resp) => {
+              if (!resp.ok) {
+                this.cancel()
+                return
+              }
+              this.form = resp.data
+            })
+          } else {
+            this.form = getDefaultData()
+          }
+          if ('editForm' in this.$refs) {
+            this.$refs.editForm.clearValidate()
+          }
+        }
+      }
+    },
     mounted() {
       ${func}
     },
+    computed() {
+
+    },
     methods: {
       ${remote}
-      doAdd() {},  
-      doCancel() {
+      submit() {
+        // 验证创建表单
+        this.$refs['editForm'].validate(async (valid) => {
+          if (!valid) {
+            return
+          }
+          ###Api.upsert(this.form).then(resp => {
+            if (resp.ok) {
+              this.$message.success('操作成功!')
+              this.$emit('success')
+            }
+          })
+        })
+      },  
+      cancel() {
         this.$emit('close')
       },
     },
