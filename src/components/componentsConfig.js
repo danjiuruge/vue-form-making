@@ -245,14 +245,15 @@ export const advanceComponents = [
       size: {
         width: 100,
         height: 100,
+        max: 5,
       },
       width: '',
-      tokenFunc: 'funcGetToken',
-      token: '',
-      domain: 'http://pfp81ptt6.bkt.clouddn.com/',
+      //tokenFunc: 'funcGetToken',
+      //token: '',
+      //domain: 'http://pfp81ptt6.bkt.clouddn.com/',
       disabled: false,
-      length: 8,
-      multiple: true
+      //length: 8,
+      //multiple: true
     }
   },
   {

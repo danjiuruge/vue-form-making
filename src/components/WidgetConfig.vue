@@ -225,15 +225,15 @@
       </template>
 
       <template v-if="data.type=='imgupload'">
-        <el-form-item label="最大上传数">
-          <el-input type="number" v-model.number="data.options.length"></el-input>
+        <el-form-item label="最大上传大小，单位M">
+          <el-input type="number" v-model.number="data.options.size.max"></el-input>
         </el-form-item>
-        <el-form-item label="Domain" :required="true">
+        <!-- el-form-item label="Domain" :required="true">
           <el-input v-model="data.options.domain"></el-input>
         </el-form-item>
         <el-form-item label="获取七牛Token方法" :required="true">
           <el-input v-model="data.options.tokenFunc"></el-input>
-        </el-form-item>
+        </el-form-item -->
       </template>
 
       <template v-if="data.type=='blank'">

@@ -132,6 +132,22 @@ function packListData(main, mainTemplate_c, formValue_c, plugin_c, plugin_import
                 :disabled="${main[i].options.disabled}" :show-alpha="${main[i].options.showAlpha}"
                 ></el-color-picker>
             </el-form-item>`)
+      }else if (main[i].type === 'cascader'){
+        mainTemplate_c.push(`
+            <el-form-item label="${main[i].name}" prop="${main[i].model}">
+              <el-cascader v-model="form.${main[i].model}" style="width: ${main[i].options.width}"
+                :clearable="${main[i].options.clearable}" :disabled="${main[i].options.disabled}"
+                :placeholder="${main[i].options.placeholder}" :options="options_${main[i].model}" change-on-select>
+              </el-cascader>
+            </el-form-item>`)
+          option_c.push(`
+        options_${main[i].model}: []`)
+          remote_c.push(`
+      def ${main[i].options.remoteFunc}(){
+        this.options_${main[i].model} = ###Api.${main[i].options.remoteFunc}.data
+      }`)
+          func_c.push(`
+      this.${main[i].options.remoteFunc}()`)
       }else if (main[i].type === 'select'){
         if (!main[i].options.remote){
           mainTemplate_c.push(`
@@ -169,6 +185,23 @@ function packListData(main, mainTemplate_c, formValue_c, plugin_c, plugin_import
           func_c.push(`
       this.${main[i].options.remoteFunc}()`)
         }
+      }else if (main[i].type === 'switch'){
+        mainTemplate_c.push(`
+            <el-form-item label="${main[i].name}" prop="${main[i].model}">
+              <el-switch v-model="form.${main[i].model}"></el-switch>
+            </el-form-item>`)
+      }else if (main[i].type === 'slider'){
+        mainTemplate_c.push(`
+            <el-form-item label="${main[i].name}" prop="${main[i].model}">
+              <el-slider v-model="form.${main[i].model}" :min="${main[i].options.min}" :max="${main[i].options.max}"
+                :step="${main[i].options.step}" style="width: ${main[i].options.width}"
+                :show-input="${main[i].options.showInput}" :disabled="${main[i].options.disabled}"
+                :range="${main[i].options.range}"></el-slider>
+            </el-form-item>`)
+      }else if (main[i].type === 'blank'){
+        mainTemplate_c.push(`
+            <el-form-item label="${main[i].name}" prop="${main[i].model}">
+            </el-form-item>`)
       }else if (main[i].type === 'book_base_cas'){
         mainTemplate_c.push(`
             <el-form-item label="${main[i].name}" prop="${main[i].model}">
@@ -180,6 +213,27 @@ function packListData(main, mainTemplate_c, formValue_c, plugin_c, plugin_import
   import ShowCategoryCascaderComponent from '@/views/components/cascaders/BookShowCategoryCascader'`)
         plugin_import_c.push(`
       ShowCategoryCascaderComponent`)
+      }else if (main[i].type === 'imgupload'){
+        mainTemplate_c.push(`
+            <el-form-item label="${main[i].name}" prop="${main[i].model}">
+              <ImageUploadComponent v-model="form.${main[i].model}"
+                :showDimension=true :limitDimensions="[{'height':${main[i].options.size.height}, 'width':${main[i].options.size.width}}]" :limitSize="${main[i].options.size.max} * 1024 * 1024"
+                placeholder="仅支持${main[i].options.size.max}M内的jpg/png文件且分辨率${main[i].options.size.width} * ${main[i].options.size.height}的图片" style="width: ${main[i].options.width}" />
+            </el-form-item>`)
+        plugin_c.push(`
+  import ImageUploadComponent from '@/views/components/uploads/uploads/ImageUploadComponent`)
+        plugin_import_c.push(`
+      ImageUploadComponent`)
+      }else if (main[i].type === 'editor'){
+        mainTemplate_c.push(`
+            <el-form-item label="${main[i].name}" prop="${main[i].model}">
+              <RichText v-model="form.${main[i].model}"
+              style="width: ${main[i].options.width}" :inputStyle="inputStyle"/>
+            </el-form-item>`)
+        plugin_c.push(`
+  import RichText from '@/components/RichTextEditor`)
+        plugin_import_c.push(`
+      RichText`)
       }
       for (let k = 0; k<main[i].rules.length; k++)
       {
@@ -233,7 +287,7 @@ export default function (data) {
     mainTemplate = AT[0].join('')
     formValue = AT[1].join('')
     plugin = AT[2].join('')
-    plugin_import = AT[3].join('')
+    plugin_import = AT[3].join(',')
     formRule = AT[4].join('')
     option = AT[5].join(',')
     remote = AT[6].join(',')
