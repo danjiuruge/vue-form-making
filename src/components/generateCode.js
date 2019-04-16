@@ -45,7 +45,7 @@ function packListData(main, mainTemplate_c, formValue_c, plugin_c, plugin_import
             </el-form-item>`)
           let temp = JSON.stringify(main[i].options.options)
           option_c.push(`
-        options_${main[i].model}: ${temp}`)
+        options_${main[i].model}: ${temp},`)
         }
         if (main[i].options.remote){
           mainTemplate_c.push(`
@@ -59,11 +59,11 @@ function packListData(main, mainTemplate_c, formValue_c, plugin_c, plugin_import
               </el-radio-group>
             </el-form-item>`)
           option_c.push(`
-        options_${main[i].model}: []`)
+        options_${main[i].model}: [],`)
           remote_c.push(`
       def ${main[i].options.remoteFunc}(){
         this.options_${main[i].model} = ###Api.${main[i].options.remoteFunc}.data
-      }`)
+      },`)
           func_c.push(`
       this.${main[i].options.remoteFunc}()`)
         }
@@ -80,7 +80,7 @@ function packListData(main, mainTemplate_c, formValue_c, plugin_c, plugin_import
             </el-form-item>`)
           let temp = JSON.stringify(main[i].options.options)
           option_c.push(`
-        options_${main[i].model}: ${temp}`)
+        options_${main[i].model}: ${temp},`)
         }
         if (main[i].options.remote){
           mainTemplate_c.push(`
@@ -94,11 +94,11 @@ function packListData(main, mainTemplate_c, formValue_c, plugin_c, plugin_import
               </el-checkbox-group>
             </el-form-item>`)
           option_c.push(`
-        options_${main[i].model}: []`)
+        options_${main[i].model}: [],`)
           remote_c.push(`
       def ${main[i].options.remoteFunc}(){
         this.options_${main[i].model} = ###Api.${main[i].options.remoteFunc}.data
-      }`)
+      },`)
           func_c.push(`
       this.${main[i].options.remoteFunc}()`)
         }
@@ -141,11 +141,11 @@ function packListData(main, mainTemplate_c, formValue_c, plugin_c, plugin_import
               </el-cascader>
             </el-form-item>`)
           option_c.push(`
-        options_${main[i].model}: []`)
+        options_${main[i].model}: [],`)
           remote_c.push(`
       def ${main[i].options.remoteFunc}(){
         this.options_${main[i].model} = ###Api.${main[i].options.remoteFunc}.data
-      }`)
+      },`)
           func_c.push(`
       this.${main[i].options.remoteFunc}()`)
       }else if (main[i].type === 'select'){
@@ -162,7 +162,7 @@ function packListData(main, mainTemplate_c, formValue_c, plugin_c, plugin_import
             </el-form-item>`)
           let temp = JSON.stringify(main[i].options.options)
           option_c.push(`
-        options_${main[i].model}: ${temp}`)
+        options_${main[i].model}: ${temp},`)
         }
         if (main[i].options.remote){
           mainTemplate_c.push(`
@@ -177,11 +177,11 @@ function packListData(main, mainTemplate_c, formValue_c, plugin_c, plugin_import
               </el-select>
             </el-form-item>`)
           option_c.push(`
-        options_${main[i].model}: []`)
+        options_${main[i].model}: [],`)
           remote_c.push(`
       def ${main[i].options.remoteFunc}(){
         this.options_${main[i].model} = ###Api.${main[i].options.remoteFunc}.data
-      }`)
+      },`)
           func_c.push(`
       this.${main[i].options.remoteFunc}()`)
         }
@@ -205,6 +205,17 @@ function packListData(main, mainTemplate_c, formValue_c, plugin_c, plugin_import
       }else if (main[i].type === 'book_base_cas'){
         mainTemplate_c.push(`
             <el-form-item label="${main[i].name}" prop="${main[i].model}">
+              <BaseCategoryCascaderComponent :clearable="${main[i].options.clearable}" class="filter-item" v-model="form.${main[i].model}"
+                placeholder="${main[i].options.placeholder}" style="width: ${main[i].options.width}" :change-on-select="true" 
+                :disabled="${main[i].options.disabled}" />
+            </el-form-item>`)
+        plugin_c.push(`
+  import BaseCategoryCascaderComponent from '@/views/components/cascaders/BookBaseCategoryCascader'`)
+        plugin_import_c.push(`
+      BaseCategoryCascaderComponent,`)
+      }else if (main[i].type === 'book_show_cas'){
+        mainTemplate_c.push(`
+            <el-form-item label="${main[i].name}" prop="${main[i].model}">
               <ShowCategoryCascaderComponent :clearable="${main[i].options.clearable}" class="filter-item" v-model="form.${main[i].model}"
                 placeholder="${main[i].options.placeholder}" style="width: ${main[i].options.width}" :change-on-select="true" 
                 :disabled="${main[i].options.disabled}" />
@@ -212,7 +223,18 @@ function packListData(main, mainTemplate_c, formValue_c, plugin_c, plugin_import
         plugin_c.push(`
   import ShowCategoryCascaderComponent from '@/views/components/cascaders/BookShowCategoryCascader'`)
         plugin_import_c.push(`
-      ShowCategoryCascaderComponent`)
+      ShowCategoryCascaderComponent,`)
+      }else if (main[i].type === 'book_input'){
+        mainTemplate_c.push(`
+            <el-form-item label="${main[i].name}" prop="${main[i].model}">
+              <BookInputComponent  v-model="form.${main[i].model}" type="textarea"
+                placeholder="${main[i].options.placeholder}" style="width: ${main[i].options.width}"
+                :disabled="${main[i].options.disabled}" />
+            </el-form-item>`)
+        plugin_c.push(`
+  import BookInputComponent from '@/views/components/inputs/bookInput'`)
+        plugin_import_c.push(`
+      BookInputComponent,`)
       }else if (main[i].type === 'imgupload'){
         mainTemplate_c.push(`
             <el-form-item label="${main[i].name}" prop="${main[i].model}">
@@ -223,7 +245,7 @@ function packListData(main, mainTemplate_c, formValue_c, plugin_c, plugin_import
         plugin_c.push(`
   import ImageUploadComponent from '@/views/components/uploads/uploads/ImageUploadComponent`)
         plugin_import_c.push(`
-      ImageUploadComponent`)
+      ImageUploadComponent,`)
       }else if (main[i].type === 'editor'){
         mainTemplate_c.push(`
             <el-form-item label="${main[i].name}" prop="${main[i].model}">
@@ -233,7 +255,7 @@ function packListData(main, mainTemplate_c, formValue_c, plugin_c, plugin_import
         plugin_c.push(`
   import RichText from '@/components/RichTextEditor`)
         plugin_import_c.push(`
-      RichText`)
+      RichText,`)
       }
       for (let k = 0; k<main[i].rules.length; k++)
       {
@@ -243,8 +265,9 @@ function packListData(main, mainTemplate_c, formValue_c, plugin_c, plugin_import
           "${main[i].model}": [{ required: ${temp.required}, message: "${main[i].model}必填", trigger: 'blur' },],`)
         }
       }
+      let temp = JSON.stringify(main[i].options.defaultValue)
       formValue_c.push(`
-          ${main[i].model}: "${main[i].options.defaultValue}",`)
+          ${main[i].model}: ${temp},`)
       AT.push(mainTemplate_c, formValue_c, plugin_c, plugin_import_c, formRule_c, option_c, remote_c, func_c)
     }
   }
@@ -287,10 +310,10 @@ export default function (data) {
     mainTemplate = AT[0].join('')
     formValue = AT[1].join('')
     plugin = AT[2].join('')
-    plugin_import = AT[3].join(',')
+    plugin_import = AT[3].join('')
     formRule = AT[4].join('')
-    option = AT[5].join(',')
-    remote = AT[6].join(',')
+    option = AT[5].join('')
+    remote = AT[6].join('')
     func = AT[7].join('')
   }
 
@@ -326,7 +349,7 @@ export default function (data) {
       return {
         formLoading: false,
         disabled: true,
-        ${option},
+        ${option}
         rules: {${formRule}
         },
         form: {
@@ -339,7 +362,7 @@ export default function (data) {
       ${func}
     },
     methods: {
-      ${remote},
+      ${remote}
       doAdd() {},  
       doCancel() {
         this.$emit('close')

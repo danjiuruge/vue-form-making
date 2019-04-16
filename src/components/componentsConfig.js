@@ -305,7 +305,40 @@ export const advanceComponents = [
       },
       remoteFunc: ''
     }
-  }
+  },
+  {
+    type: 'book_show_cas',
+    name: '书籍显示分类级选',
+    icon: 'icon-jilianxuanze',
+    options: {
+      defaultValue: [],
+      width: '',
+      placeholder: '',
+      disabled: false,
+      clearable: false,
+      remote: true,
+      remoteOptions: [],
+      props: {
+        value: 'value',
+        label: 'label',
+        children: 'children'
+      },
+      remoteFunc: ''
+    }
+  },
+  {
+    type: 'book_input',
+    name: '书籍ID文本框输入',
+    icon: 'icon-diy-com-textarea',
+    options: {
+      width: '100%',
+      defaultValue: '',
+      required: false,
+      disabled: false,
+      pattern: '',
+      placeholder: ''
+    }
+  },
 ]
 
 export const layoutComponents = [

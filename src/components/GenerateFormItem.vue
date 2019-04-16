@@ -196,8 +196,28 @@
         :style="{width: widget.options.width}"
         :options="widget.options.remoteOptions"
       >
-
       </el-cascader>
+    </template>
+
+    <template v-if="widget.type == 'book_show_cas'">
+      <el-cascader
+        v-model="dataModel"
+        :disabled="widget.options.disabled"
+        :clearable="widget.options.clearable"
+        :placeholder="widget.options.placeholder"
+        :style="{width: widget.options.width}"
+        :options="widget.options.remoteOptions"
+      >
+      </el-cascader>
+    </template>
+
+    <template v-if="widget.type == 'book_input'">
+      <el-input type="textarea" :rows="2"
+        v-model="dataModel"
+        :disabled="widget.options.disabled"
+        :placeholder="widget.options.placeholder"
+        :style="{width: widget.options.width}"
+      ></el-input>
     </template>
   </el-form-item>
 </template>

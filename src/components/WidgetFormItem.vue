@@ -177,8 +177,28 @@
             :style="{width: element.options.width}"
             :options="element.options.remoteOptions"
           >
-
           </el-cascader>
+        </template>
+
+        <template v-if="element.type == 'book_show_cas'">
+          <el-cascader
+            v-model="element.options.defaultValue"
+            :disabled="element.options.disabled"
+            :clearable="element.options.clearable"
+            :placeholder="element.options.placeholder"
+            :style="{width: element.options.width}"
+            :options="element.options.remoteOptions"
+          >
+          </el-cascader>
+        </template>
+
+        <template v-if="element.type == 'book_input'">
+          <el-input type="textarea" :rows="2"
+            v-model="element.options.defaultValue"
+            :style="{width: element.options.width}"
+            :disabled="element.options.disabled"
+            :placeholder="element.options.placeholder"
+          ></el-input>
         </template>
 
         <template v-if="element.type == 'editor'">
