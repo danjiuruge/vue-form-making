@@ -38,10 +38,12 @@
       <el-form-item label="步长" v-if="Object.keys(data.options).indexOf('step')>=0">
         <el-input-number v-model="data.options.step" :min="0" :max="100" :step="1"></el-input-number>
       </el-form-item>
-      <el-form-item label="是否多选" v-if="data.type=='select' || data.type == 'copyright_select'">
+      <!-- el-form-item label="是否多选" v-if="data.type=='select' || data.type == 'copyright_select'" -->
+      <el-form-item label="是否多选" v-if="data.type.indexOf('select') != -1">
         <el-switch v-model="data.options.multiple" @change="handleSelectMuliple"></el-switch>
       </el-form-item>
-      <el-form-item label="是否可搜索" v-if="data.type=='select' || data.type== 'copyright_select'">
+      <!-- el-form-item label="是否可搜索" v-if="data.type=='select' || data.type == 'copyright_select'" -->
+      <el-form-item label="是否可搜索" v-if="data.type.indexOf('select') != -1">
         <el-switch v-model="data.options.filterable"></el-switch>
       </el-form-item>
       <el-form-item label="允许半选" v-if="Object.keys(data.options).indexOf('allowHalf')>=0">
@@ -224,16 +226,10 @@
         </el-form-item>
       </template>
 
-      <template v-if="data.type=='imgupload'">
+      <template v-if="data.type.indexOf('upload') != -1">
         <el-form-item label="最大上传大小，单位M">
           <el-input type="number" v-model.number="data.options.size.max"></el-input>
         </el-form-item>
-        <!-- el-form-item label="Domain" :required="true">
-          <el-input v-model="data.options.domain"></el-input>
-        </el-form-item>
-        <el-form-item label="获取七牛Token方法" :required="true">
-          <el-input v-model="data.options.tokenFunc"></el-input>
-        </el-form-item -->
       </template>
 
       <template v-if="data.type=='blank'">
@@ -302,20 +298,14 @@
           <div>
             <el-checkbox v-model="data.options.required">必填</el-checkbox>
           </div>
-          <!-- el-select v-if="Object.keys(data.options).indexOf('dataType')>=0" v-model="data.options.dataType" size="mini" >
-            <el-option value="string" label="字符串"></el-option>
-            <el-option value="number" label="数字"></el-option>
-            <el-option value="boolean" label="布尔值"></el-option>
-            <el-option value="integer" label="整数"></el-option>
-            <el-option value="float" label="浮点数"></el-option>
-            <el-option value="url" label="URL地址"></el-option>
-            <el-option value="email" label="邮箱地址"></el-option>
-            <el-option value="hex" label="十六进制"></el-option>
-          </el-select -->
-          
-          <!-- div v-if="Object.keys(data.options).indexOf('pattern')>=0">
-            <el-input size="mini" v-model.lazy="data.options.pattern"  style=" width: 240px;" placeholder="填写正则表达式"></el-input>
-          </div -->
+          <div v-if="Object.keys(data.options).indexOf('pattern')>=0">
+            <!-- el-input size="mini" v-model.lazy="data.options.pattern"  style=" width: 240px;" placeholder="填写校验函数"></el-input -->
+            <el-select v-model.lazy="data.options.pattern" :multiple="true">
+              <el-option
+                :label="item.label" v-for="item in optionRules" :key="item.value" :value="item.value"
+              ></el-option>
+            </el-select>
+          </div>
         </el-form-item>
       </template>
     </el-form>
@@ -338,7 +328,31 @@ export default {
         pattern: null,
         range: null,
         length: null
-      }
+      },
+      optionRules: [{'value': 'validateURL', 'label': '合法Url'},
+        {'value': 'validateLowerCase', 'label': '小写字母'},
+        {'value': 'validateUpperCase', 'label': '大写字母'},
+        {'value': 'validateInputIds', 'label': '英文逗号分隔的数字'},
+        {'value': 'validateNumberId', 'label': '数字'},
+        {'value': 'isOppositeNumber', 'label': '正整数'},
+        {'value': 'validateAsteriskInputIds', 'label': '星号分隔的数字'},
+        {'value': 'validateLength', 'label': '校验长度'},
+        {'value': 'validateSpace', 'label': '检查是否全是空格'},
+        {'value': 'validateGreaterZero', 'label': '大于等于0的整数'},
+        {'value': 'validateEmptyOrGreaterZero', 'label': '空或大于等于0的整数'},
+        {'value': 'validateStrIsRepeat', 'label': '检查以逗号分隔的字符串是否有重复值'},
+        {'value': 'validateBookIds', 'label': '书籍ID校验'},
+        {'value': 'validateCopybelongIds', 'label': '版权方ID校验'},
+        {'value': 'validateShowCategoryIds', 'label': '展示分类ID校验'},
+        {'value': 'validateListenBookIds', 'label': '听书ID校验'},
+        {'value': 'validateReadingParty', 'label': '大咖ID校验'},
+        {'value': 'validateSectionIds', 'label': '榜单ID校验'},
+        {'value': 'validateMenuId', 'label': '菜单ID校验'},
+        {'value': 'validateProduct', 'label': '产品ID校验'},
+        {'value': 'validateChannelKey', 'label': '频道KEY校验'},
+        {'value': 'validateDateTimeRange', 'label': '检查时间范围'},
+        {'value': 'validateJSON', 'label': 'Json格式校验'},
+      ]
     }
   },
   computed: {
