@@ -8,7 +8,7 @@ export const basicComponents = [
       defaultValue: '',
       required: false,
       dataType: 'string',
-      pattern: '',
+      pattern: [],
       placeholder: '请输入'
     }
   },
@@ -21,7 +21,7 @@ export const basicComponents = [
       defaultValue: '',
       required: false,
       disabled: false,
-      pattern: '',
+      pattern: [],
       placeholder: '请输入'
     }
   },
@@ -139,8 +139,8 @@ export const basicComponents = [
       placeholder: '',
       startPlaceholder: '开始时间',
       endPlaceholder: '结束时间',
-      type: 'date',
-      format: 'yyyy-MM-dd',
+      type: 'datetimerange',
+      format: 'yyyy-MM-dd HH:mm:ss',
       timestamp: false,
       required: false,
       width: '100%',
@@ -232,36 +232,340 @@ export const basicComponents = [
     }
   }
 ]
-
-export const advanceComponents = [
+export const inputComponents = [
   {
-    type: 'blank',
-    name: '自定义',
-    icon: 'icon-ic',
+    type: 'book_input',
+    name: '书籍ID文本框',
+    icon: 'icon-diy-com-textarea',
     options: {
-      defaultType: 'String'
+      width: '100%',
+      defaultValue: '',
+      required: false,
+      disabled: false,
+      pattern: [],
+      placeholder: '请输入书籍ID'
     }
   },
+  {
+    type: 'lisbook_input',
+    name: '听书ID文本框',
+    icon: 'icon-diy-com-textarea',
+    options: {
+      width: '100%',
+      defaultValue: '',
+      required: false,
+      disabled: false,
+      pattern: [],
+      placeholder: '请输入听书ID'
+    }
+  },
+]
+export const treeComponents = [
+  {
+    type: 'version_tree',
+    name: '版本树',
+    icon: 'icon-diy-com-textarea',
+    options: {
+      width: '100%',
+      defaultValue: '',
+      required: false,
+      disabled: true,
+      placeholder: '请选择版本'
+    }
+  },
+  {
+    type: 'base_cate_tree',
+    name: '底层分类树',
+    icon: 'icon-input',
+    options: {
+      width: '100%',
+      defaultValue: '',
+      required: false,
+      disabled: true,
+      placeholder: '请选择底层分类'
+    }
+  },
+  {
+    type: 'lis_cate_tree',
+    name: '听书分类树',
+    icon: 'icon-input',
+    options: {
+      width: '100%',
+      defaultValue: '',
+      required: false,
+      disabled: true,
+      placeholder: '请选择听书分类'
+    }
+  },
+  {
+    type: 'show_cate_tree',
+    name: '展示分类树',
+    icon: 'icon-input',
+    options: {
+      width: '100%',
+      defaultValue: '',
+      required: false,
+      disabled: true,
+      placeholder: '请选择展示分类'
+    }
+  },
+]
+export const lookupBackComponents = [
+  {
+    type: 'version_lookup_back',
+    name: '版权方ID查找带回',
+    icon: 'icon-diy-com-textarea',
+    options: {
+      width: '100%',
+      defaultValue: '',
+      required: false,
+      disabled: false,
+      placeholder: '请选择版权方ID'
+    }
+  },
+]
+export const selectComponents = [
+  {
+    type: 'copyright_select',
+    name: '版权方下拉选择框',
+    icon: 'icon-select',
+    options: {
+      defaultValue: [],
+      multiple: true,
+      disabled: false,
+      clearable: false,
+      placeholder: '请选择版权方',
+      required: false,
+      width: '100%',
+      filterable: true,
+    }
+  },
+  {
+    type: 'book_select',
+    name: '书籍下拉选择框',
+    icon: 'icon-select',
+    options: {
+      defaultValue: [],
+      multiple: true,
+      disabled: false,
+      clearable: false,
+      placeholder: '请选择书籍',
+      required: false,
+      width: '100%',
+      filterable: true,
+    }
+  },
+  {
+    type: 'lisbook_select',
+    name: '听书下拉选择框',
+    icon: 'icon-select',
+    options: {
+      defaultValue: [],
+      multiple: true,
+      disabled: false,
+      clearable: false,
+      placeholder: '请选择听书',
+      required: false,
+      width: '100%',
+      filterable: true,
+    }
+  },
+  {
+    type: 'scheme_select',
+    name: '方案下拉选择框',
+    icon: 'icon-select',
+    options: {
+      defaultValue: [],
+      multiple: true,
+      disabled: false,
+      clearable: false,
+      placeholder: '请选择方案',
+      required: false,
+      width: '100%',
+      filterable: true,
+    }
+  },
+  {
+    type: 'target_user_select',
+    name: '目标用户下拉选择框',
+    icon: 'icon-select',
+    options: {
+      defaultValue: [],
+      multiple: true,
+      disabled: false,
+      clearable: false,
+      placeholder: '请选择目标用户',
+      required: false,
+      width: '100%',
+      filterable: true,
+    }
+  },
+  {
+    type: 'user_group_select',
+    name: '用户集下拉选择框',
+    icon: 'icon-select',
+    options: {
+      defaultValue: [],
+      multiple: true,
+      disabled: false,
+      clearable: false,
+      placeholder: '请选择用户集',
+      required: false,
+      width: '100%',
+      filterable: true,
+    }
+  },
+  {
+    type: 'version_set_select',
+    name: '版本集下拉选择框',
+    icon: 'icon-select',
+    options: {
+      defaultValue: [],
+      multiple: true,
+      disabled: false,
+      clearable: false,
+      placeholder: '请选择版本集',
+      required: false,
+      width: '100%',
+      filterable: true,
+    }
+  },
+  {
+    type: 'version_select',
+    name: '版本下拉选择框',
+    icon: 'icon-select',
+    options: {
+      defaultValue: [],
+      multiple: true,
+      disabled: false,
+      clearable: false,
+      placeholder: '请选择版本',
+      required: false,
+      width: '100%',
+      filterable: true,
+    }
+  },
+]
+export const cascaderComponents = [
+  {
+    type: 'book_base_cas',
+    name: '书籍基础分类级选',
+    icon: 'icon-jilianxuanze',
+    options: {
+      defaultValue: [],
+      width: '100%',
+      placeholder: '请选择基础分类',
+      disabled: false,
+      clearable: false,
+      remote: true,
+      remoteOptions: [],
+      props: {
+        value: 'value',
+        label: 'label',
+        children: 'children'
+      },
+      remoteFunc: ''
+    }
+  },
+  {
+    type: 'book_show_cas',
+    name: '书籍显示分类级选',
+    icon: 'icon-jilianxuanze',
+    options: {
+      defaultValue: [],
+      width: '100%',
+      placeholder: '请选择显示分类',
+      disabled: false,
+      clearable: false,
+      remote: true,
+      remoteOptions: [],
+      props: {
+        value: 'value',
+        label: 'label',
+        children: 'children'
+      },
+      remoteFunc: ''
+    }
+  },
+] 
+export const uploadComponents = [
   {
     type: 'imgupload',
     name: '图片',
     icon: 'icon-tupian',
     options: {
-      defaultValue: [],
+      defaultValue: "",
       size: {
         width: 100,
         height: 100,
         max: 5,
       },
       width: '100%',
-      //tokenFunc: 'funcGetToken',
-      //token: '',
-      //domain: 'http://pfp81ptt6.bkt.clouddn.com/',
       disabled: false,
-      //length: 8,
-      //multiple: true
     }
   },
+  {
+    type: 'videoupload',
+    name: '视频',
+    icon: 'icon-tupian',
+    options: {
+      defaultValue: "",
+      size: {
+        width: 100,
+        height: 100,
+        max: 30,
+      },
+      width: '100%',
+      disabled: false,
+    }
+  },
+  {
+    type: 'audioupload',
+    name: '音频',
+    icon: 'icon-tupian',
+    options: {
+      defaultValue: "",
+      size: {
+        width: 100,
+        height: 100,
+        max: 30,
+      },
+      width: '100%',
+      disabled: false,
+    }
+  },
+  {
+    type: 'excelupload',
+    name: 'Excel',
+    icon: 'icon-tupian',
+    options: {
+      defaultValue: "",
+      size: {
+        width: 100,
+        height: 100,
+        max: 100,
+      },
+      width: '100%',
+      disabled: false,
+    }
+  },
+  {
+    type: 'fileupload',
+    name: '文件',
+    icon: 'icon-tupian',
+    options: {
+      defaultValue: "",
+      size: {
+        width: 100,
+        height: 100,
+        max: 100,
+      },
+      width: '100%',
+      disabled: false,
+    }
+  },
+]
+export const advanceComponents = [
   {
     type: 'editor',
     name: '编辑器',
@@ -291,73 +595,12 @@ export const advanceComponents = [
       remoteFunc: ''
     }
   },
-
   {
-    type: 'book_base_cas',
-    name: '书籍基础分类级选',
-    icon: 'icon-jilianxuanze',
+    type: 'blank',
+    name: '自定义',
+    icon: 'icon-ic',
     options: {
-      defaultValue: [],
-      width: '100%',
-      placeholder: '请选择',
-      disabled: false,
-      clearable: false,
-      remote: true,
-      remoteOptions: [],
-      props: {
-        value: 'value',
-        label: 'label',
-        children: 'children'
-      },
-      remoteFunc: ''
-    }
-  },
-  {
-    type: 'book_show_cas',
-    name: '书籍显示分类级选',
-    icon: 'icon-jilianxuanze',
-    options: {
-      defaultValue: [],
-      width: '100%',
-      placeholder: '请选择',
-      disabled: false,
-      clearable: false,
-      remote: true,
-      remoteOptions: [],
-      props: {
-        value: 'value',
-        label: 'label',
-        children: 'children'
-      },
-      remoteFunc: ''
-    }
-  },
-  {
-    type: 'book_input',
-    name: '书籍ID文本框输入',
-    icon: 'icon-diy-com-textarea',
-    options: {
-      width: '100%',
-      defaultValue: '',
-      required: false,
-      disabled: false,
-      pattern: '',
-      placeholder: '请输入'
-    }
-  },
-  {
-    type: 'copyright_select',
-    name: '版权方下拉选择框',
-    icon: 'icon-select',
-    options: {
-      defaultValue: [],
-      multiple: true,
-      disabled: false,
-      clearable: false,
-      placeholder: '请选择',
-      required: false,
-      width: '100%',
-      filterable: true,
+      defaultType: 'String'
     }
   },
 ]
@@ -378,7 +621,7 @@ export const layoutComponents = [
       }
     ],
     options: {
-      gutter: 0,
+      gutter: 21,
       justify: 'start',
       align: 'top'
     }

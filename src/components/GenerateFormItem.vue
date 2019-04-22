@@ -152,16 +152,58 @@
     </template>
 
     <template v-if="widget.type=='imgupload'">
-      <fm-upload
+      <el-input
         v-model="dataModel"
         :disabled="widget.options.disabled"
         :style="{'width': widget.options.width}"
         :width="widget.options.size.width"
         :height="widget.options.size.height"
-        :token="widget.options.token"
-        :domain="widget.options.domain"
       >
-      </fm-upload>
+      </el-input>
+    </template>
+
+    <template v-if="widget.type=='audioupload'">
+      <el-input
+        v-model="dataModel"
+        :disabled="widget.options.disabled"
+        :style="{'width': widget.options.width}"
+        :width="widget.options.size.width"
+        :height="widget.options.size.height"
+      >
+      </el-input>
+    </template>
+
+    <template v-if="widget.type=='excelupload'">
+      <el-input
+        v-model="dataModel"
+        :disabled="widget.options.disabled"
+        :style="{'width': widget.options.width}"
+        :width="widget.options.size.width"
+        :height="widget.options.size.height"
+      >
+      </el-input>
+    </template>
+
+    <template v-if="widget.type=='fileupload'">
+      <el-input
+        v-model="dataModel"
+        :disabled="widget.options.disabled"
+        :style="{'width': widget.options.width}"
+        :width="widget.options.size.width"
+        :height="widget.options.size.height"
+      >
+      </el-input>
+    </template>
+
+    <template v-if="widget.type=='videoupload'">
+      <el-input
+        v-model="dataModel"
+        :disabled="widget.options.disabled"
+        :style="{'width': widget.options.width}"
+        :width="widget.options.size.width"
+        :height="widget.options.size.height"
+      >
+      </el-input>
     </template>
 
     <template v-if="widget.type == 'editor'">
@@ -220,7 +262,148 @@
       ></el-input>
     </template>
 
+    <template v-if="widget.type == 'lisbook_input'">
+      <el-input type="textarea" :rows="2"
+        v-model="dataModel"
+        :disabled="widget.options.disabled"
+        :placeholder="widget.options.placeholder"
+        :style="{width: widget.options.width}"
+      ></el-input>
+    </template>
+
+    <template v-if="widget.type == 'version_tree'">
+      <el-input type="textarea" :rows="2"
+        v-model="dataModel"
+        :disabled="widget.options.disabled"
+        :placeholder="widget.options.placeholder"
+        :style="{width: widget.options.width}"
+      ></el-input>
+    </template>
+
+    <template v-if="widget.type == 'base_cate_tree'">
+      <el-input type="text"
+        v-model="dataModel"
+        :disabled="widget.options.disabled"
+        :placeholder="widget.options.placeholder"
+        :style="{width: widget.options.width}"
+      ></el-input>
+    </template>
+
+    <template v-if="widget.type == 'lis_cate_tree'">
+      <el-input type="text"
+        v-model="dataModel"
+        :disabled="widget.options.disabled"
+        :placeholder="widget.options.placeholder"
+        :style="{width: widget.options.width}"
+      ></el-input>
+    </template>
+
+    <template v-if="widget.type == 'show_cate_tree'">
+      <el-input type="text"
+        v-model="dataModel"
+        :disabled="widget.options.disabled"
+        :placeholder="widget.options.placeholder"
+        :style="{width: widget.options.width}"
+      ></el-input>
+    </template>
+
+    <template v-if="widget.type == 'version_lookup_back'">
+      <el-input type="textarea" :rows="2"
+        v-model="dataModel"
+        :disabled="widget.options.disabled"
+        :placeholder="widget.options.placeholder"
+        :style="{width: widget.options.width}"
+      ></el-input>
+    </template>
+
     <template v-if="widget.type == 'copyright_select'">
+      <el-select
+        v-model="dataModel"
+        :disabled="widget.options.disabled"
+        :multiple="widget.options.multiple"
+        :clearable="widget.options.clearable"
+        :placeholder="widget.options.placeholder"
+        :style="{width: widget.options.width}"
+        :filterable="widget.options.filterable"
+      >
+      </el-select>
+    </template>
+
+    <template v-if="widget.type == 'book_select'">
+      <el-select
+        v-model="dataModel"
+        :disabled="widget.options.disabled"
+        :multiple="widget.options.multiple"
+        :clearable="widget.options.clearable"
+        :placeholder="widget.options.placeholder"
+        :style="{width: widget.options.width}"
+        :filterable="widget.options.filterable"
+      >
+      </el-select>
+    </template>
+
+    <template v-if="widget.type == 'lisbook_select'">
+      <el-select
+        v-model="dataModel"
+        :disabled="widget.options.disabled"
+        :multiple="widget.options.multiple"
+        :clearable="widget.options.clearable"
+        :placeholder="widget.options.placeholder"
+        :style="{width: widget.options.width}"
+        :filterable="widget.options.filterable"
+      >
+      </el-select>
+    </template>
+
+    <template v-if="widget.type == 'scheme_select'">
+      <el-select
+        v-model="dataModel"
+        :disabled="widget.options.disabled"
+        :multiple="widget.options.multiple"
+        :clearable="widget.options.clearable"
+        :placeholder="widget.options.placeholder"
+        :style="{width: widget.options.width}"
+        :filterable="widget.options.filterable"
+      >
+      </el-select>
+    </template>
+    <template v-if="widget.type == 'target_user_select'">
+      <el-select
+        v-model="dataModel"
+        :disabled="widget.options.disabled"
+        :multiple="widget.options.multiple"
+        :clearable="widget.options.clearable"
+        :placeholder="widget.options.placeholder"
+        :style="{width: widget.options.width}"
+        :filterable="widget.options.filterable"
+      >
+      </el-select>
+    </template>
+    <template v-if="widget.type == 'user_group_select'">
+      <el-select
+        v-model="dataModel"
+        :disabled="widget.options.disabled"
+        :multiple="widget.options.multiple"
+        :clearable="widget.options.clearable"
+        :placeholder="widget.options.placeholder"
+        :style="{width: widget.options.width}"
+        :filterable="widget.options.filterable"
+      >
+      </el-select>
+    </template>
+    <template v-if="widget.type == 'version_set_select'">
+      <el-select
+        v-model="dataModel"
+        :disabled="widget.options.disabled"
+        :multiple="widget.options.multiple"
+        :clearable="widget.options.clearable"
+        :placeholder="widget.options.placeholder"
+        :style="{width: widget.options.width}"
+        :filterable="widget.options.filterable"
+      >
+      </el-select>
+    </template>
+    <template v-if="widget.type == 'version_select'">
       <el-select
         v-model="dataModel"
         :disabled="widget.options.disabled"
@@ -236,13 +419,11 @@
 </template>
 
 <script>
-import FmUpload from './Upload'
 import FmEditor from './Editor/tinymce'
 
 export default {
   props: ['widget', 'models', 'rules', 'remote'],
   components: {
-    FmUpload,
     FmEditor
   },
   data () {
@@ -260,12 +441,6 @@ export default {
             children: item[this.widget.options.props.children]
           }
         })
-      })
-    }
-
-    if (this.widget.type === 'imgupload') {
-      this.remote[this.widget.options.tokenFunc]((data) => {
-        this.widget.options.token = data
       })
     }
   },

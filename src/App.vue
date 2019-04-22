@@ -1,16 +1,9 @@
 <template>
   <div id="app">
-    <div class="fm-header">
+    <!--div class="fm-header">
       <img class="fm-logo" src="./assets/logo.png">
       <div class="fm-title" @click="handleHome">表单设计器</div>
-
-      <div class="fm-link">
-        <a target="_blank" href="#/price">商业授权</a>
-        <a href="https://github.com/GavinZhuLei/vue-form-making">GitHub</a>
-        <a href="https://gitee.com/gavinzhulei/vue-form-making">码云</a>
-        <a href="http://www.xiaoyaoji.cn" target="_blank">小幺鸡接口文档</a>
-      </div>
-    </div>
+    </div -->
     <div  class="fm-container"><router-view/></div>
   </div>
 </template>
@@ -20,9 +13,10 @@
 export default {
   name: 'app',
   methods: {
+    /*
     handleHome () {
       this.$router.push({path: '/'})
-    }
+    }*/
   }
 }
 </script>
@@ -30,20 +24,20 @@ export default {
 <style lang="scss">
 .fm-header{
   height: 50px;
-  box-shadow: 0 2px 10px rgba(70,160,252, 0.6);
+  box-shadow: 0 0px 1px rgb(0, 0, 0);
   padding: 0 10px;
-  background-image: linear-gradient(to right,#1278f6,#00b4aa);
+  background-image: linear-gradient(to right,#ffffff,#ffffff);
   position: relative;
 
   .fm-logo{
-    height: 26px;
+    height: 35px;
     vertical-align: middle;
   }
   .fm-title{
     display: inline-block;
     line-height: 50px;
     vertical-align: middle;
-    color: #fff;
+    color:#121313;
     font-size: 20px;
     font-weight: 600;
     opacity: 0.8;

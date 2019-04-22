@@ -3,40 +3,7 @@
     <el-main class="fm2-main">
       <el-container>
         <el-aside style="wdith: 250px;">
-
           <div class="components-list">
-            <div class="widget-cate">基础字段</div>
-            <draggable tag="ul" :list="basicComponents" 
-              v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}"
-              @end="handleMoveEnd"
-              @start="handleMoveStart"
-              :move="handleMove"
-            >
-              
-              <li class="form-edit-widget-label" v-for="(item, index) in basicComponents" :key="index">
-                <a>
-                  <i class="icon iconfont" :class="item.icon"></i>
-                  <span>{{item.name}}</span>
-                </a>
-              </li>
-            </draggable>
-
-            <div class="widget-cate">高级字段</div>
-            <draggable tag="ul" :list="advanceComponents" 
-              v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}"
-              @end="handleMoveEnd"
-              @start="handleMoveStart"
-              :move="handleMove"
-            >
-              
-              <li class="form-edit-widget-label" v-for="(item, index) in advanceComponents" :key="index">
-                <a>
-                  <i class="icon iconfont" :class="item.icon"></i>
-                  <span>{{item.name}}</span>
-                </a>
-              </li>
-            </draggable>
-            
             <div class="widget-cate">布局字段</div>
             <draggable tag="ul" :list="layoutComponents" 
               v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}"
@@ -44,7 +11,6 @@
               @start="handleMoveStart"
               :move="handleMove"
             >
-              
               <li class="form-edit-widget-label data-grid" v-for="(item, index) in layoutComponents" :key="index">
                 <a>
                   <i class="icon iconfont" :class="item.icon"></i>
@@ -52,8 +18,119 @@
                 </a>
               </li>
             </draggable>
+            <div class="widget-cate">Cascaders组件</div>
+            <draggable tag="ul" :list="cascaderComponents" 
+              v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}"
+              @end="handleMoveEnd"
+              @start="handleMoveStart"
+              :move="handleMove"
+            >
+              <li class="form-edit-widget-label" v-for="(item, index) in cascaderComponents" :key="index">
+                <a>
+                  <i class="icon iconfont" :class="item.icon"></i>
+                  <span>{{item.name}}</span>
+                </a>
+              </li>
+            </draggable>
+            <div class="widget-cate">Inputs组件</div>
+            <draggable tag="ul" :list="inputComponents" 
+              v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}"
+              @end="handleMoveEnd"
+              @start="handleMoveStart"
+              :move="handleMove"
+            >
+              <li class="form-edit-widget-label" v-for="(item, index) in inputComponents" :key="index">
+                <a>
+                  <i class="icon iconfont" :class="item.icon"></i>
+                  <span>{{item.name}}</span>
+                </a>
+              </li>
+            </draggable>
+            <div class="widget-cate">Selects组件</div>
+            <draggable tag="ul" :list="selectComponents" 
+              v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}"
+              @end="handleMoveEnd"
+              @start="handleMoveStart"
+              :move="handleMove"
+            >
+              <li class="form-edit-widget-label" v-for="(item, index) in selectComponents" :key="index">
+                <a>
+                  <i class="icon iconfont" :class="item.icon"></i>
+                  <span>{{item.name}}</span>
+                </a>
+              </li>
+            </draggable>
+            <div class="widget-cate">LookupBacks组件</div>
+            <draggable tag="ul" :list="lookupBackComponents" 
+              v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}"
+              @end="handleMoveEnd"
+              @start="handleMoveStart"
+              :move="handleMove"
+            >
+              <li class="form-edit-widget-label" v-for="(item, index) in lookupBackComponents" :key="index">
+                <a>
+                  <i class="icon iconfont" :class="item.icon"></i>
+                  <span>{{item.name}}</span>
+                </a>
+              </li>
+            </draggable>
+            <div class="widget-cate">Trees组件</div>
+            <draggable tag="ul" :list="treeComponents" 
+              v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}"
+              @end="handleMoveEnd"
+              @start="handleMoveStart"
+              :move="handleMove"
+            >
+              <li class="form-edit-widget-label" v-for="(item, index) in treeComponents" :key="index">
+                <a>
+                  <i class="icon iconfont" :class="item.icon"></i>
+                  <span>{{item.name}}</span>
+                </a>
+              </li>
+            </draggable>
+            <div class="widget-cate">上传组件</div>
+            <draggable tag="ul" :list="uploadComponents" 
+              v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}"
+              @end="handleMoveEnd"
+              @start="handleMoveStart"
+              :move="handleMove"
+            >
+              <li class="form-edit-widget-label" v-for="(item, index) in uploadComponents" :key="index">
+                <a>
+                  <i class="icon iconfont" :class="item.icon"></i>
+                  <span>{{item.name}}</span>
+                </a>
+              </li>
+            </draggable>
+            <div class="widget-cate">基础字段</div>
+            <draggable tag="ul" :list="basicComponents" 
+              v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}"
+              @end="handleMoveEnd"
+              @start="handleMoveStart"
+              :move="handleMove"
+            >
+              <li class="form-edit-widget-label" v-for="(item, index) in basicComponents" :key="index">
+                <a>
+                  <i class="icon iconfont" :class="item.icon"></i>
+                  <span>{{item.name}}</span>
+                </a>
+              </li>
+            </draggable>
+            <div class="widget-cate">高级字段</div>
+            <draggable tag="ul" :list="advanceComponents" 
+              v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}"
+              @end="handleMoveEnd"
+              @start="handleMoveStart"
+              :move="handleMove"
+            >
+              <li class="form-edit-widget-label" v-for="(item, index) in advanceComponents" :key="index">
+                <a>
+                  <i class="icon iconfont" :class="item.icon"></i>
+                  <span>{{item.name}}</span>
+                </a>
+              </li>
+            </draggable>
           </div>
-          
         </el-aside>
         <el-container class="center-container" direction="vertical">
           <el-header class="btn-bar" style="height: 45px;">
@@ -65,11 +142,9 @@
             <el-button v-if="generateCode" type="text" size="medium" icon="el-icon-document" @click="handleGenerateCode">生成代码</el-button>
           </el-header>
           <el-main :class="{'widget-empty': widgetForm.list.length == 0}">
-            
             <widget-form v-if="!resetJson"  ref="widgetForm" :data="widgetForm" :select.sync="widgetFormSelect"></widget-form>
           </el-main>
         </el-container>
-        
         <el-aside class="widget-config-container">
           <el-container>
             <el-header height="45px">
@@ -81,9 +156,7 @@
               <form-config v-show="configTab=='form'" :data="widgetForm.config"></form-config>
             </el-main>
           </el-container>
-          
         </el-aside>
-
         <cus-dialog
           :visible="previewVisible"
           @on-close="previewVisible = false"
@@ -93,14 +166,12 @@
           form
         >
           <generate-form insite="true" v-if="previewVisible" :data="widgetForm" :value="widgetModels" :remote="remoteFuncs" ref="generateForm">
-
             <template v-slot:blank="scope">
               宽度：<el-input v-model="scope.model.blank.width" style="width: 100px"></el-input>
               高度：<el-input v-model="scope.model.blank.height" style="width: 100px"></el-input>
             </template>
           </generate-form>
         </cus-dialog>
-
         <cus-dialog
           :visible="uploadVisible"
           @on-close="uploadVisible = false"
@@ -112,7 +183,6 @@
           <el-alert type="info" title="JSON格式如下，直接复制生成的json覆盖此处代码点击确定即可"></el-alert>
           <div id="uploadeditor" style="height: 400px;width: 100%;">{{jsonEg}}</div>
         </cus-dialog>
-
         <cus-dialog
           :visible="jsonVisible"
           @on-close="jsonVisible = false"
@@ -120,29 +190,26 @@
           width="800px"
           form
         >
-          
           <div id="jsoneditor" style="height: 400px;width: 100%;">{{jsonTemplate}}</div>
-          
           <template slot="action">
             <el-button id="copybtn" data-clipboard-target=".ace_text-input">双击复制</el-button>
           </template>
         </cus-dialog>
-
         <cus-dialog
           :visible="codeVisible"
           @on-close="codeVisible = false"
           ref="codePreview"
           width="1000px"
           form
-          :action="false"
         >
           <div id="codeeditor" style="height: 500px; width: 100%;">{{htmlTemplate}}</div>
+          <template slot="action">
+            <el-button id="copybtn" data-clipboard-target=".ace_text-input">双击复制</el-button>
+          </template>
         </cus-dialog>
       </el-container>
     </el-main>
-    <el-footer height="30px">Powered by <a target="_blank" href="https://github.com/GavinZhuLei/vue-form-making">GavinZhuLei</a></el-footer>
   </el-container>
-  
 </template>
 
 <script>
@@ -153,7 +220,9 @@ import WidgetForm from './WidgetForm'
 import CusDialog from './CusDialog'
 import GenerateForm from './GenerateForm'
 import Clipboard from 'clipboard'
-import {basicComponents, layoutComponents, advanceComponents} from './componentsConfig.js'
+import {basicComponents, layoutComponents, advanceComponents,
+  cascaderComponents, inputComponents, selectComponents,
+  lookupBackComponents, treeComponents, uploadComponents} from './componentsConfig.js'
 import {loadJs, loadCss} from '../util/index.js'
 import request from '../util/request.js'
 import generateCode from './generateCode.js'
@@ -191,13 +260,19 @@ export default {
       basicComponents,
       layoutComponents,
       advanceComponents,
+      cascaderComponents,
+      inputComponents,
+      selectComponents,
+      treeComponents,
+      uploadComponents,
+      lookupBackComponents,
       resetJson: false,
       widgetForm: {
         list: [],
         config: {
           labelWidth: 100,
-          labelPosition: 'top',
-          size: 'small'
+          labelPosition: 'left',
+          size: 'mini'
         },
       },
       configTab: 'widget',
@@ -214,217 +289,9 @@ export default {
               {id: '2', name: '2222'},
               {id: '3', name: '3333'}
             ]
-
             resolve(options)
           }, 2000)
         },
-        funcGetToken (resolve) {
-          request.get('http://tools-server.xiaoyaoji.cn/api/uptoken').then(res => {
-            resolve(res.uptoken)
-          })
-        },
-        func_cascader (resolve) {
-            const options = [{
-              value: 'zhinan',
-              label: '指南',
-              children: [{
-                value: 'shejiyuanze',
-                label: '设计原则',
-                children: [{
-                  value: 'yizhi',
-                  label: '一致'
-                }, {
-                  value: 'fankui',
-                  label: '反馈'
-                }, {
-                  value: 'xiaolv',
-                  label: '效率'
-                }, {
-                  value: 'kekong',
-                  label: '可控'
-                }]
-              }, {
-                value: 'daohang',
-                label: '导航',
-                children: [{
-                  value: 'cexiangdaohang',
-                  label: '侧向导航'
-                }, {
-                  value: 'dingbudaohang',
-                  label: '顶部导航'
-                }]
-              }]
-            }, {
-              value: 'zujian',
-              label: '组件',
-              children: [{
-                value: 'basic',
-                label: 'Basic',
-                children: [{
-                  value: 'layout',
-                  label: 'Layout 布局'
-                }, {
-                  value: 'color',
-                  label: 'Color 色彩'
-                }, {
-                  value: 'typography',
-                  label: 'Typography 字体'
-                }, {
-                  value: 'icon',
-                  label: 'Icon 图标'
-                }, {
-                  value: 'button',
-                  label: 'Button 按钮'
-                }]
-              }, {
-                value: 'form',
-                label: 'Form',
-                children: [{
-                  value: 'radio',
-                  label: 'Radio 单选框'
-                }, {
-                  value: 'checkbox',
-                  label: 'Checkbox 多选框'
-                }, {
-                  value: 'input',
-                  label: 'Input 输入框'
-                }, {
-                  value: 'input-number',
-                  label: 'InputNumber 计数器'
-                }, {
-                  value: 'select',
-                  label: 'Select 选择器'
-                }, {
-                  value: 'cascader',
-                  label: 'Cascader 级联选择器'
-                }, {
-                  value: 'switch',
-                  label: 'Switch 开关'
-                }, {
-                  value: 'slider',
-                  label: 'Slider 滑块'
-                }, {
-                  value: 'time-picker',
-                  label: 'TimePicker 时间选择器'
-                }, {
-                  value: 'date-picker',
-                  label: 'DatePicker 日期选择器'
-                }, {
-                  value: 'datetime-picker',
-                  label: 'DateTimePicker 日期时间选择器'
-                }, {
-                  value: 'upload',
-                  label: 'Upload 上传'
-                }, {
-                  value: 'rate',
-                  label: 'Rate 评分'
-                }, {
-                  value: 'form',
-                  label: 'Form 表单'
-                }]
-              }, {
-                value: 'data',
-                label: 'Data',
-                children: [{
-                  value: 'table',
-                  label: 'Table 表格'
-                }, {
-                  value: 'tag',
-                  label: 'Tag 标签'
-                }, {
-                  value: 'progress',
-                  label: 'Progress 进度条'
-                }, {
-                  value: 'tree',
-                  label: 'Tree 树形控件'
-                }, {
-                  value: 'pagination',
-                  label: 'Pagination 分页'
-                }, {
-                  value: 'badge',
-                  label: 'Badge 标记'
-                }]
-              }, {
-                value: 'notice',
-                label: 'Notice',
-                children: [{
-                  value: 'alert',
-                  label: 'Alert 警告'
-                }, {
-                  value: 'loading',
-                  label: 'Loading 加载'
-                }, {
-                  value: 'message',
-                  label: 'Message 消息提示'
-                }, {
-                  value: 'message-box',
-                  label: 'MessageBox 弹框'
-                }, {
-                  value: 'notification',
-                  label: 'Notification 通知'
-                }]
-              }, {
-                value: 'navigation',
-                label: 'Navigation',
-                children: [{
-                  value: 'menu',
-                  label: 'NavMenu 导航菜单'
-                }, {
-                  value: 'tabs',
-                  label: 'Tabs 标签页'
-                }, {
-                  value: 'breadcrumb',
-                  label: 'Breadcrumb 面包屑'
-                }, {
-                  value: 'dropdown',
-                  label: 'Dropdown 下拉菜单'
-                }, {
-                  value: 'steps',
-                  label: 'Steps 步骤条'
-                }]
-              }, {
-                value: 'others',
-                label: 'Others',
-                children: [{
-                  value: 'dialog',
-                  label: 'Dialog 对话框'
-                }, {
-                  value: 'tooltip',
-                  label: 'Tooltip 文字提示'
-                }, {
-                  value: 'popover',
-                  label: 'Popover 弹出框'
-                }, {
-                  value: 'card',
-                  label: 'Card 卡片'
-                }, {
-                  value: 'carousel',
-                  label: 'Carousel 走马灯'
-                }, {
-                  value: 'collapse',
-                  label: 'Collapse 折叠面板'
-                }]
-              }]
-            }, {
-              value: 'ziyuan',
-              label: '资源',
-              children: [{
-                value: 'axure',
-                label: 'Axure Components'
-              }, {
-                value: 'sketch',
-                label: 'Sketch Templates'
-              }, {
-                value: 'jiaohu',
-                label: '组件交互文档'
-              }]
-            }]
-
-            resolve(options)
-        },
-        upload_callback (response, file, fileList) {
-          console.log('callback', response, file, fileList)
-        }
       },
       widgetModels: {
       },
@@ -444,32 +311,10 @@ export default {
         "required": false,
         "dataType": "string",
         "pattern": "",
-        "placeholder": "",
-        "remoteFunc": "func_1540908864000_94322"
+        "placeholder": ""
       },
       "key": "1540908864000_94322",
       "model": "input_1540908864000_94322",
-      "rules": [
-        {
-          "type": "string",
-          "message": "单行文本格式不正确"
-        }
-      ]
-    },
-    {
-      "type": "textarea",
-      "name": "多行文本",
-      "icon": "icon-diy-com-textarea",
-      "options": {
-        "width": "100%",
-        "defaultValue": "",
-        "required": false,
-        "pattern": "",
-        "placeholder": "",
-        "remoteFunc": "func_1540908876000_19435"
-      },
-      "key": "1540908876000_19435",
-      "model": "textarea_1540908876000_19435",
       "rules": []
     }
   ],
@@ -485,9 +330,6 @@ export default {
 
   },
   methods: {
-    handleGoGithub () {
-      window.location.href = 'https://github.com/GavinZhuLei/vue-form-making'
-    },
     handleConfigSelect (value) {
       this.configTab = value
     },
@@ -516,10 +358,8 @@ export default {
       this.jsonTemplate = this.widgetForm
       //console.log(JSON.stringify(this.widgetForm))
       this.$nextTick(() => {
-
         const editor = ace.edit('jsoneditor')
         editor.session.setMode("ace/mode/json")
-
         const btnCopy = new Clipboard('#copybtn')
       })
     },
@@ -529,6 +369,7 @@ export default {
       this.$nextTick(() => {
         const editor = ace.edit('codeeditor')
         editor.session.setMode("ace/mode/html")
+        const btnCopy = new Clipboard('#copybtn')
       })
     },
     handleUpload () {
@@ -555,7 +396,6 @@ export default {
     },
     setJSON (json) {
       this.widgetForm = json
-
       if (json.list.length> 0) {
         this.widgetFormSelect = json.list[0]
       }
@@ -581,5 +421,4 @@ export default {
   background: url('../assets/form_empty.png') no-repeat;
   background-position: 50%;
 }
-
 </style>

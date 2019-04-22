@@ -2,6 +2,7 @@
   <el-dialog
     class="cus-dialog-container"
     :title="title"
+    :top="top"
     :visible.sync="dialogVisible"
     :close-on-click-modal="false"
     append-to-body
@@ -39,6 +40,10 @@ export default {
     width: {
       type: String,
       default: '600px'
+    },
+    top: {
+      type: String,
+      default: '10px'
     },
     form: {
       type: Boolean,
